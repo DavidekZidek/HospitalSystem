@@ -19,4 +19,9 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Patient\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Patient\Index.cshtml" />
+    </ItemGroup>
+
 </Project>
