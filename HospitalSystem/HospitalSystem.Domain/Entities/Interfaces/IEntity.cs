@@ -1,6 +1,7 @@
-namespace HospitalSystem.Domain.Entities.Interfaces;
-
-public interface IEntity<TKey>
+namespace HospitalSystem.Domain.Entities.Interfaces
 {
-    TKey Id { get; set; }
+    public interface IEntity<TKey>
+    {
+        TKey Id { get; set; }
+    }
 }

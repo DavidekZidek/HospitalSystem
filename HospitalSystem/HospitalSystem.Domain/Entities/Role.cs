@@ -2,11 +2,10 @@ namespace HospitalSystem.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 [Table("Role")]
-public class Role
+public class Role : Entity<int>
 {
-    public int ID_role { get; set; }
-    public string Role_name { get; set; }
+    public string RoleName { get; set; } // Název role
 
-    // Navigation Property
+    // Navigační vlastnost
     public ICollection<UserAccount> UserAccounts { get; set; }
 }

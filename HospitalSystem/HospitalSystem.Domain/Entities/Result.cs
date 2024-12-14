@@ -2,7 +2,7 @@ namespace HospitalSystem.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 [Table("Result")]
-public class Results
+public class Results : Entity<int>
 {
     public int ID_Results { get; set; }
     public string ResultsDescription { get; set; }

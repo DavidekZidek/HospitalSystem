@@ -2,9 +2,8 @@ namespace HospitalSystem.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 [Table("Doctor")]
-public class Doctor
+public class Doctor : Entity<int>
 {
-    public int ID_Doctor { get; set; }
     public string Specialization { get; set; }
     public int YearsOfExperience { get; set; }
 
