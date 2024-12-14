@@ -18,12 +18,16 @@ namespace HospitalSystem.Infrastructure.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Explicitní nastavení klíče (volitelné)
-            modelBuilder.Entity<Patient>().HasKey(p => p.Id);
-            modelBuilder.Entity<Doctor>().HasKey(d => d.Id);
-            modelBuilder.Entity<Person>().HasKey(p => p.Id);
-            modelBuilder.Entity<UserAccount>().HasKey(u => u.Id);
-            modelBuilder.Entity<HealthAction>().HasKey(h => h.Id);
+            // Nastavení relací (volitelné)
+            modelBuilder.Entity<Doctor>()
+                .HasOne(d => d.Person)
+                .WithOne(p => p.Doctor)
+                .HasForeignKey<Doctor>(d => d.PersonId);
+
+            modelBuilder.Entity<Patient>()
+                .HasOne(p => p.Person)
+                .WithOne(p => p.Patient)
+                .HasForeignKey<Patient>(p => p.PersonId);
 
             base.OnModelCreating(modelBuilder);
         }
