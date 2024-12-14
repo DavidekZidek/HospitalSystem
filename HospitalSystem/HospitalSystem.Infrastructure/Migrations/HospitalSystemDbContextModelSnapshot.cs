@@ -143,6 +143,32 @@ namespace HospitalSystem.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Patient");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BirthNumber = "9001011234",
+                            DateOfBirth = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HealthInsurance = "Company A",
+                            PersonId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BirthNumber = "8506156789",
+                            DateOfBirth = new DateTime(1985, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HealthInsurance = "Company B",
+                            PersonId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BirthNumber = "0003204567",
+                            DateOfBirth = new DateTime(2000, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HealthInsurance = "Company C",
+                            PersonId = 3
+                        });
                 });
 
             modelBuilder.Entity("HospitalSystem.Domain.Entities.Person", b =>
@@ -174,6 +200,62 @@ namespace HospitalSystem.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Person");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "John",
+                            Gender = "Male",
+                            LastName = "Doe",
+                            Mail = "john.doe@example.com",
+                            Phone = "123456789"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Jane",
+                            Gender = "Female",
+                            LastName = "Smith",
+                            Mail = "jane.smith@example.com",
+                            Phone = "987654321"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FirstName = "Michael",
+                            Gender = "Male",
+                            LastName = "Brown",
+                            Mail = "michael.brown@example.com",
+                            Phone = "555123456"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FirstName = "Emily",
+                            Gender = "Female",
+                            LastName = "White",
+                            Mail = "emily.white@example.com",
+                            Phone = "555654321"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FirstName = "Chris",
+                            Gender = "Male",
+                            LastName = "Green",
+                            Mail = "chris.green@example.com",
+                            Phone = "444123456"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            FirstName = "Anna",
+                            Gender = "Female",
+                            LastName = "Black",
+                            Mail = "anna.black@example.com",
+                            Phone = "444654321"
+                        });
                 });
 
             modelBuilder.Entity("HospitalSystem.Domain.Entities.Registration", b =>
@@ -251,6 +333,23 @@ namespace HospitalSystem.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            RoleName = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            RoleName = "Doctor"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            RoleName = "Patient"
+                        });
                 });
 
             modelBuilder.Entity("HospitalSystem.Domain.Entities.UserAccount", b =>
@@ -281,6 +380,35 @@ namespace HospitalSystem.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserAccounts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2024, 12, 14, 21, 0, 50, 797, DateTimeKind.Local).AddTicks(9400),
+                            Name = "Admin",
+                            Password = "admin123",
+                            PersonalID = 0,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2024, 12, 14, 21, 0, 50, 797, DateTimeKind.Local).AddTicks(9420),
+                            Name = "DoctorJohn",
+                            Password = "doctor123",
+                            PersonalID = 0,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2024, 12, 14, 21, 0, 50, 797, DateTimeKind.Local).AddTicks(9420),
+                            Name = "PatientJane",
+                            Password = "patient123",
+                            PersonalID = 0,
+                            RoleId = 3
+                        });
                 });
 
             modelBuilder.Entity("HospitalSystem.Domain.Entities.Vaccination", b =>

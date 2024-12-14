@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using HospitalSystem.Domain.Entities;
+using HospitalSystem.Infrastructure.Database.Seeding;
 
 namespace HospitalSystem.Infrastructure.Database
 {
@@ -18,18 +19,15 @@ namespace HospitalSystem.Infrastructure.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Nastavení relací (volitelné)
-            modelBuilder.Entity<Doctor>()
-                .HasOne(d => d.Person)
-                .WithOne(p => p.Doctor)
-                .HasForeignKey<Doctor>(d => d.PersonId);
-
-            modelBuilder.Entity<Patient>()
-                .HasOne(p => p.Person)
-                .WithOne(p => p.Patient)
-                .HasForeignKey<Patient>(p => p.PersonId);
+            // Seeding v pořadí závislostí
+            modelBuilder.Entity<Role>().HasData(RoleInit.GetRoles());
+            modelBuilder.Entity<Person>().HasData(PersonInit.GetPersons()); // Přidejte PersonInit, pokud je potřeba
+            modelBuilder.Entity<UserAccount>().HasData(UserAccountInit.GetUserAccounts());
+            modelBuilder.Entity<Patient>().HasData(PatientInit.GetPatients());
 
             base.OnModelCreating(modelBuilder);
         }
+
+
     }
 }

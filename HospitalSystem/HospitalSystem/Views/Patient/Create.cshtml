@@ -1,0 +1,26 @@
+﻿@model HospitalSystem.Domain.Entities.Patient
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Patient</title>
+</head>
+<body>
+<h1>Create a New Patient</h1>
+<form method="post" action="/Patient/Create">
+    <div>
+        <label for="BirthNumber">Birth Number:</label>
+        <input type="text" id="BirthNumber" name="BirthNumber" required />
+    </div>
+    <div>
+        <label for="HealthInsurance">Health Insurance:</label>
+        <input type="text" id="HealthInsurance" name="HealthInsurance" required />
+    </div>
+    <div>
+        <label for="DateOfBirth">Date of Birth:</label>
+        <input type="date" id="DateOfBirth" name="DateOfBirth" required />
+    </div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
