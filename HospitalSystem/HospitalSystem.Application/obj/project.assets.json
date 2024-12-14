@@ -1,0 +1,116 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "HospitalSystem.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/HospitalSystem.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HospitalSystem.Domain.dll": {}
+        }
+      },
+      "HospitalSystem.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "HospitalSystem.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/HospitalSystem.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HospitalSystem.Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "HospitalSystem.Domain/1.0.0": {
+      "type": "project",
+      "path": "../HospitalSystem.Domain/HospitalSystem.Domain.csproj",
+      "msbuildProject": "../HospitalSystem.Domain/HospitalSystem.Domain.csproj"
+    },
+    "HospitalSystem.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj",
+      "msbuildProject": "../HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "HospitalSystem.Domain >= 1.0.0",
+      "HospitalSystem.Infrastructure >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/Users/davidzidek/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Application/HospitalSystem.Application.csproj",
+      "projectName": "HospitalSystem.Application",
+      "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Application/HospitalSystem.Application.csproj",
+      "packagesPath": "/Users/davidzidek/.nuget/packages/",
+      "outputPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Application/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/davidzidek/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj": {
+              "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj"
+            },
+            "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj": {
+              "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

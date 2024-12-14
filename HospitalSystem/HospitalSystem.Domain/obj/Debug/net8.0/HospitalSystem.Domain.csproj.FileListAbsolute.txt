@@ -1,0 +1,12 @@
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/bin/Debug/net8.0/HospitalSystem.Domain.deps.json
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/bin/Debug/net8.0/HospitalSystem.Domain.dll
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/bin/Debug/net8.0/HospitalSystem.Domain.pdb
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/obj/Debug/net8.0/HospitalSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/obj/Debug/net8.0/HospitalSystem.Domain.AssemblyInfoInputs.cache
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/obj/Debug/net8.0/HospitalSystem.Domain.AssemblyInfo.cs
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/obj/Debug/net8.0/HospitalSystem.Domain.csproj.CoreCompileInputs.cache
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/obj/Debug/net8.0/HospitalSystem.Domain.sourcelink.json
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/obj/Debug/net8.0/HospitalSystem.Domain.dll
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/obj/Debug/net8.0/refint/HospitalSystem.Domain.dll
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/obj/Debug/net8.0/HospitalSystem.Domain.pdb
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/obj/Debug/net8.0/ref/HospitalSystem.Domain.dll
