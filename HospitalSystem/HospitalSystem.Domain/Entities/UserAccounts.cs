@@ -1,5 +1,7 @@
 namespace HospitalSystem.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
+[Table("UserAccounts")]
 public class UserAccount
 {
     public int PersonalID { get; set; }

@@ -1,5 +1,7 @@
 namespace HospitalSystem.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
+[Table("HealthExamination")]
 public class HealthExamination
 {
     public int ID_HealthExamination { get; set; }
