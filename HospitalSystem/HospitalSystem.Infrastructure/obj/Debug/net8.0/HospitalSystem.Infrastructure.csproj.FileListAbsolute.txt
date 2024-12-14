@@ -14,3 +14,5 @@
 /Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/obj/Debug/net8.0/refint/HospitalSystem.Infrastructure.dll
 /Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/obj/Debug/net8.0/HospitalSystem.Infrastructure.pdb
 /Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/obj/Debug/net8.0/ref/HospitalSystem.Infrastructure.dll
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/bin/Debug/net8.0/HospitalSystem.Infrastructure.runtimeconfig.json
+/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/obj/Debug/net8.0/HospitalSystem.Infrastructure.genruntimeconfig.cache
