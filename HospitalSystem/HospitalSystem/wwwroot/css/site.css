@@ -12,11 +12,30 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Zabrání horizontálnímu posouvání */
 }
 
-body {
-  margin-bottom: 60px;
+
+.reviews-container {
+  gap: 20px; /* Mezery mezi kartami */
 }
+
+.card{
+  height: 500px;
+}
+
+footer h6 {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding-bottom: 0.5rem;
+}
+footer p, footer a {
+  font-size: 0.9rem;
+}
+
