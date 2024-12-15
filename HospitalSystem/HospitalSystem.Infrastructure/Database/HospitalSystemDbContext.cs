@@ -32,7 +32,7 @@ namespace HospitalSystem.Infrastructure.Database
             //Identity - User and Role initialization
             //roles must be added first
             CapacityInit rolesInit = new CapacityInit();
-            modelBuilder.Entity<Role>().HasData(CapacityInit.GetRolesAMC());
+            modelBuilder.Entity<Capacity>().HasData(CapacityInit.GetRolesAMC());
             
             //then, create users ..
             UserInit userInit = new UserInit();
@@ -46,6 +46,7 @@ namespace HospitalSystem.Infrastructure.Database
             UserCapacityInit userRolesInit = new UserCapacityInit();
             List<IdentityUserRole<int>> adminUserRoles = userRolesInit.GetRolesForAdmin();
             List<IdentityUserRole<int>> doctorUserRoles = userRolesInit.GetRolesForDoctor();
+            
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(adminUserRoles);
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(doctorUserRoles);
 
