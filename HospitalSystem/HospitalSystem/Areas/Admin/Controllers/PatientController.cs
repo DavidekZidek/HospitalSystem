@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using HospitalSystem.Infrastructure.Database;
 using HospitalSystem.Domain.Entities;
+using HospitalSystem.Application.Abstraction;
 using Microsoft.EntityFrameworkCore;
 
 namespace HospitalSystem.Areas.Admin.Controllers
@@ -8,18 +9,18 @@ namespace HospitalSystem.Areas.Admin.Controllers
     [Area("Admin")]
     public class PatientController : Controller
     {
-        private readonly HospitalSystemDbContext _context;
+        IPatientAppService _patientAppService;
 
-        public PatientController(HospitalSystemDbContext context)
+        public PatientController(IPatientAppService patientAppService)
         {
-            _context = context;
+            _patientAppService = patientAppService;
         }
 
         // Akce pro zobrazení seznamu pacientů včetně jejich osobních informací
         public IActionResult Index()
         {
             // Načítání pacientů včetně propojené osoby (Person)
-            var patients = _context.Patients.Include(p => p.Person).ToList();
+            var patients = _patientAppService.Select();
             return View(patients); // Předává seznam pacientů do view
         }
 
@@ -27,7 +28,7 @@ namespace HospitalSystem.Areas.Admin.Controllers
         public IActionResult Details(int id)
         {
             // Načítání detailů pacienta včetně propojené osoby (Person)
-            var patient = _context.Patients.Include(p => p.Person)
+            var patient = _patientAppService.Select()
                 .FirstOrDefault(p => p.Id == id);
 
             if (patient == null)

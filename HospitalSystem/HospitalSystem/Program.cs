@@ -1,5 +1,7 @@
 using HospitalSystem.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
+using HospitalSystem.Application.Abstraction;
+using HospitalSystem.Application.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,10 @@ builder.Services.AddDbContext<HospitalSystemDbContext>(options =>
     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 30))));
 
 builder.Services.AddControllersWithViews();
+
+// Registrace služeb aplikační vrstvy
+builder.Services.AddScoped<IPatientAppService, PatientAppService>();
+builder.Services.AddScoped<IHomeService, HomeService>();
 
 var app = builder.Build();
 
