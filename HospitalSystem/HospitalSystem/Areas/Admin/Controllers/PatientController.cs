@@ -38,5 +38,33 @@ namespace HospitalSystem.Areas.Admin.Controllers
 
             return View(patient); // Předává konkrétního pacienta do view
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Patient patient)
+        {
+            _patientAppService.Create(patient);
+
+            return RedirectToAction(nameof(PatientController.Index));
+        }
+
+        public IActionResult Delete(int id)
+        {
+            bool deleted = _patientAppService.Delete(id);
+            
+            if (deleted)
+            {
+                return RedirectToAction(nameof(PatientController.Index));
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }

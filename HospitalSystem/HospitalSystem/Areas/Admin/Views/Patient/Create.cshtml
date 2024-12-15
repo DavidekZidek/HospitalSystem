@@ -1,0 +1,24 @@
+@model Patient
+@{
+    ViewData["Title"] = "Patient - Create";
+}
+<h1>@ViewData["Title"]</h1>
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label class="form-label" asp-for="Person.FirstName"></label>
+        <input class="form-control" asp-for="Person.FirstName">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Person.LastName"></label>
+        <input class="form-control" asp-for="Person.LastName">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="BirthNumber"></label>
+        <input class="form-control" asp-for="BirthNumber">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="HealthInsurance"></label>
+        <input class="form-control" asp-for="HealthInsurance">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
