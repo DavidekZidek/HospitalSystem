@@ -2,6 +2,8 @@ using HospitalSystem.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using HospitalSystem.Application.Abstraction;
 using HospitalSystem.Application.Implementation;
+using Microsoft.AspNetCore.Identity;
+using HospitalSystem.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,11 @@ builder.Services.AddDbContext<HospitalSystemDbContext>(options =>
     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 30))));
 
 builder.Services.AddControllersWithViews();
+
+//Configuration for Identity
+builder.Services.AddIdentity<User, Capacity>()
+    .AddEntityFrameworkStores<HospitalSystemDbContext>()
+    .AddDefaultTokenProviders();
 
 // Registrace služeb aplikační vrstvy
 builder.Services.AddScoped<IPatientAppService, PatientAppService>();
@@ -31,6 +38,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
