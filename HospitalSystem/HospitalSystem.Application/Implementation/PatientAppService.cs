@@ -7,10 +7,12 @@ namespace HospitalSystem.Application.Implementation;
 public class PatientAppService : IPatientAppService
 {
     HospitalSystemDbContext _hospitalSystemDbContext;
+    IFileUploadService _fileUploadService;
 
-    public PatientAppService(HospitalSystemDbContext hospitalSystemDbContext)
+    public PatientAppService(HospitalSystemDbContext hospitalSystemDbContext, IFileUploadService fileUploadService)
     {
         _hospitalSystemDbContext = hospitalSystemDbContext;
+        _fileUploadService = fileUploadService;
     }
 
     public IList<Patient> Select()

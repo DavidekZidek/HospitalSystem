@@ -44,6 +44,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 // Registrace služeb aplikační vrstvy
+builder.Services.AddScoped<IFileUploadService, FileUploadService>(serviceProvider => 
+    new FileUploadService(serviceProvider.GetService<IWebHostEnvironment>().WebRootPath));
 builder.Services.AddScoped<IPatientAppService, PatientAppService>();
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IAccountService, AccountIdentityService>();
