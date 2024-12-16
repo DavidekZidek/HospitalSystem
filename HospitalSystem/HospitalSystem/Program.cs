@@ -47,6 +47,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddScoped<IPatientAppService, PatientAppService>();
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IAccountService, AccountIdentityService>();
+builder.Services.AddScoped<ISecurityService, SecurityIdentityService>();
 
 var app = builder.Build();
 
