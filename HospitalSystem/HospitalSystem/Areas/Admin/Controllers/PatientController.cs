@@ -3,10 +3,13 @@ using HospitalSystem.Infrastructure.Database;
 using HospitalSystem.Domain.Entities;
 using HospitalSystem.Application.Abstraction;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using HospitalSystem.Infrastructure.Identity.Enums;
 
 namespace HospitalSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(Capacitys.Admin) + ", " + nameof(Capacitys.Doctor))]
     public class PatientController : Controller
     {
         IPatientAppService _patientAppService;
@@ -49,8 +52,13 @@ namespace HospitalSystem.Areas.Admin.Controllers
         public IActionResult Create(Patient patient)
         {
             _patientAppService.Create(patient);
+            if (ModelState.IsValid)
+            {
+                _patientAppService.Create(patient);
+                return RedirectToAction(nameof(PatientController.Index));
+            }
 
-            return RedirectToAction(nameof(PatientController.Index));
+            return View(patient);
         }
 
         public IActionResult Delete(int id)

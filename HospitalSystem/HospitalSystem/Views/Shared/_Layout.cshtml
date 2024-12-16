@@ -35,6 +35,18 @@
                 <li class="nav-item px-3"><a class="nav-link" href="#">Link</a></li>
                 <li class="nav-item px-3"><a class="nav-link" href="#">Link</a></li>
                 <li class="nav-item px-3"><a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                
+                
+                
+                @* @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Capacitys.Admin)) || User.IsInRole(nameof(Capacitys.Doctor)))) *@
+                @* { *@
+                @*     <li class="nav-item"> *@
+                @*         <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Select">Products</a> *@
+                @*     </li> *@
+                @* } *@
+                
+                
+                
             </ul>
             @{
             @if (User.Identity.IsAuthenticated == false)
