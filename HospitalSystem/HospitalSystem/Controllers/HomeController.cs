@@ -33,4 +33,20 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    
+    public IActionResult PatientsAndVisitors()
+    {
+        return View();
+    }
+
+    public IActionResult MedicalDepartments()
+    {
+        return View();
+    }
+
+    public IActionResult Career()
+    {
+        return View();
+    }
+
 }

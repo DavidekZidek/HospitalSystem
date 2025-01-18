@@ -34,16 +34,26 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Patients" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Patients">Patients and Visitors</a>
+                    <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">
+                        Home
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Departments" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Departments">Medical Departments</a>
+                    <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "PatientsAndVisitors" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="PatientsAndVisitors">
+                        Patients and Visitors
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Career" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Career">Career</a>
+                    <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Departments" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="MedicalDepartments">
+                        Medical Departments
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Career" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Career">
+                        Career
+                    </a>
                 </li>
             </ul>
-            @* Dynamická kontrola přihlášení uživatele *@
             @if (User.Identity.IsAuthenticated == false)
             {
                 <ul class="navbar-nav ms-3">
