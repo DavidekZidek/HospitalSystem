@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using HospitalSystem.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 using HospitalSystem.Domain.Entities;
 using HospitalSystem.Application.Abstraction;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using HospitalSystem.Infrastructure.Identity.Enums;
 
@@ -12,26 +11,39 @@ namespace HospitalSystem.Areas.Admin.Controllers
     [Authorize(Roles = nameof(Capacitys.Admin) + ", " + nameof(Capacitys.Doctor))]
     public class PatientController : Controller
     {
-        IPatientAppService _patientAppService;
+        private readonly IPatientAppService _patientAppService;
+        private readonly DbContext _dbContext; // Přidání DbContextu pro načítání osob
 
-        public PatientController(IPatientAppService patientAppService)
+        public PatientController(IPatientAppService patientAppService, DbContext dbContext)
         {
             _patientAppService = patientAppService;
+            _dbContext = dbContext;
         }
 
-        // Akce pro zobrazení seznamu pacientů včetně jejich osobních informací
+        // Akce pro zobrazení seznamu pacientů a osob
         public IActionResult Index()
         {
-            // Načítání pacientů včetně propojené osoby (Person)
-            var patients = _patientAppService.Select();
-            return View(patients); // Předává seznam pacientů do view
+            // Načtení pacientů včetně propojené osoby (Person)
+            var patients = _dbContext.Set<Patient>()
+                .Include(p => p.Person) // Zahrnutí relace Person
+                .ToList();
+
+            // Načtení všech osob
+            var persons = _dbContext.Set<Person>().ToList();
+
+            // Odeslání seznamu osob do ViewData
+            ViewData["Persons"] = persons;
+
+            // Vrací seznam pacientů do pohledu
+            return View(patients);
         }
 
-        // Akce pro zobrazení detailu konkrétního pacienta včetně jeho osobních údajů
+// Akce pro zobrazení detailu konkrétního pacienta
         public IActionResult Details(int id)
         {
-            // Načítání detailů pacienta včetně propojené osoby (Person)
-            var patient = _patientAppService.Select()
+            // Načtení detailů pacienta včetně propojené osoby (Person)
+            var patient = _dbContext.Set<Patient>()
+                .Include(p => p.Person) // Zahrnutí relace Person
                 .FirstOrDefault(p => p.Id == id);
 
             if (patient == null)
@@ -39,8 +51,9 @@ namespace HospitalSystem.Areas.Admin.Controllers
                 return NotFound(); // Pokud pacient neexistuje, vrátí 404
             }
 
-            return View(patient); // Předává konkrétního pacienta do view
+            return View(patient); // Předání pacienta do pohledu
         }
+
 
         [HttpGet]
         public IActionResult Create()
@@ -51,11 +64,10 @@ namespace HospitalSystem.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Patient patient)
         {
-            _patientAppService.Create(patient);
             if (ModelState.IsValid)
             {
                 _patientAppService.Create(patient);
-                return RedirectToAction(nameof(PatientController.Index));
+                return RedirectToAction(nameof(Index));
             }
 
             return View(patient);
@@ -64,10 +76,10 @@ namespace HospitalSystem.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             bool deleted = _patientAppService.Delete(id);
-            
+
             if (deleted)
             {
-                return RedirectToAction(nameof(PatientController.Index));
+                return RedirectToAction(nameof(Index));
             }
             else
             {

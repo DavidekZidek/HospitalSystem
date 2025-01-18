@@ -1,0 +1,124 @@
+﻿@model IEnumerable<HospitalSystem.Domain.Entities.Patient>
+
+@{
+    ViewData["Title"] = "User Dashboard";
+    var persons = ViewBag.Persons as IEnumerable<HospitalSystem.Domain.Entities.Person>;
+    var healthInsuranceCount = ViewBag.HealthInsuranceCount ?? 0;
+    var patientCount = ViewBag.PatientCount ?? 0;
+    var healthActionCount = ViewBag.HealthActionCount ?? 0;
+    var doctorCount = ViewBag.DoctorCount ?? 0;
+}
+
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<div class="dashboard-container">
+    <!-- Boční navigační panel -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h3>Hospital</h3>
+        </div>
+        <ul class="menu">
+            <li><a href="#" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            <li><a href="#"><i class="bi bi-people"></i> Patients</a></li>
+            <li><a href="#"><i class="bi bi-person"></i> Staffs</a></li>
+            <li><a href="#"><i class="bi bi-file-earmark-text"></i> Lab Reports</a></li>
+            <li><a href="#"><i class="bi bi-people-fill"></i> My Team</a></li>
+            <li><a href="#"><i class="bi bi-chat-dots"></i> Chat</a></li>
+        </ul>
+    </aside>
+
+    <!-- Hlavní obsah -->
+    <main class="main-content">
+        <!-- Statistiky -->
+        <div class="stats-cards">
+            <div class="card stat-card purple">
+                <h3>Health Insurances</h3>
+                <p class="number">@healthInsuranceCount</p>
+                <p>Total unique health insurances</p>
+            </div>
+            <div class="card stat-card blue">
+                <h3>Patients</h3>
+                <p class="number">@patientCount</p>
+                <p>Total registered patients</p>
+            </div>
+            <div class="card stat-card green">
+                <h3>Health Actions</h3>
+                <p class="number">@healthActionCount</p>
+                <p>Total health actions performed</p>
+            </div>
+            <div class="card stat-card orange">
+                <h3>Doctors</h3>
+                <p class="number">@doctorCount</p>
+                <p>Total registered doctors</p>
+            </div>
+        </div>
+
+        <!-- Tabulka pacientů -->
+        <div class="patient-list mt-4">
+            <h3>Patient List</h3>
+            @if (Model != null && Model.Any())
+            {
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Patient Name</th>
+                        <th>Birth Number</th>
+                        <th>Health Insurance</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var patient in Model)
+                    {
+                        <tr>
+                            <td>@patient.Id</td>
+                            <td>@(patient.Person?.FirstName + " " + patient.Person?.LastName ?? "Unknown")</td>
+                            <td>@patient.BirthNumber</td>
+                            <td>@patient.HealthInsurance</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No patients found!</p>
+            }
+        </div>
+
+        <!-- Tabulka osob -->
+        <div class="person-list mt-5">
+            <h3>Person List</h3>
+            @if (persons != null && persons.Any())
+            {
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Person ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var person in persons)
+                    {
+                        <tr>
+                            <td>@person.Id</td>
+                            <td>@person.FirstName</td>
+                            <td>@person.LastName</td>
+                            <td>@person.Mail</td>
+                            <td>@person.Phone</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No persons found!</p>
+            }
+        </div>
+    </main>
+</div>

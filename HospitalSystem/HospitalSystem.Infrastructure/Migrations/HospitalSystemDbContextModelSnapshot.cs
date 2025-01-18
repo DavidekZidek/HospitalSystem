@@ -88,6 +88,20 @@ namespace HospitalSystem.Infrastructure.Migrations
                     b.HasIndex("RegistrationId");
 
                     b.ToTable("HealthAction");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ProcedureName = "Blood Test",
+                            RegistrationId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ProcedureName = "Vaccination",
+                            RegistrationId = 2
+                        });
                 });
 
             modelBuilder.Entity("HospitalSystem.Domain.Entities.HealthExamination", b =>
@@ -385,7 +399,7 @@ namespace HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 12, 16, 12, 9, 57, 685, DateTimeKind.Local).AddTicks(5800),
+                            CreatedAt = new DateTime(2025, 1, 18, 21, 6, 27, 161, DateTimeKind.Local).AddTicks(4481),
                             Name = "Admin",
                             Password = "admin123",
                             PersonalID = 0,
@@ -394,7 +408,7 @@ namespace HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 12, 16, 12, 9, 57, 685, DateTimeKind.Local).AddTicks(5840),
+                            CreatedAt = new DateTime(2025, 1, 18, 21, 6, 27, 161, DateTimeKind.Local).AddTicks(4529),
                             Name = "DoctorJohn",
                             Password = "doctor123",
                             PersonalID = 0,
@@ -403,7 +417,7 @@ namespace HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 12, 16, 12, 9, 57, 685, DateTimeKind.Local).AddTicks(5840),
+                            CreatedAt = new DateTime(2025, 1, 18, 21, 6, 27, 161, DateTimeKind.Local).AddTicks(4531),
                             Name = "PatientJane",
                             Password = "patient123",
                             PersonalID = 0,

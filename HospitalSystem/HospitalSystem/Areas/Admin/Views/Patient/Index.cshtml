@@ -19,15 +19,12 @@
     {
         <tr>
             <td>@patient.Id</td>
-            <!-- Pokud Person je null, vypíše "Unknown" -->
-            <td>@((patient.Person != null) ? patient.Person.FirstName + " " + patient.Person.LastName : "Unknown")</td>
+            <td>@(patient.Person != null ? patient.Person.FirstName + " " + patient.Person.LastName : "Unknown")</td>
             <td>@patient.BirthNumber</td>
             <td>@patient.DateOfBirth.ToShortDateString()</td>
             <td>@patient.HealthInsurance</td>
-            <!-- Kontrola, jestli Person není null před zobrazením Phone -->
-            <td>@patient.Person?.Phone"</td>
-            <!-- Kontrola, jestli Person není null před zobrazením Email -->
-            <td>@patient.Person?.Mail"</td>
+            <td>@patient.Person?.Phone</td>
+            <td>@patient.Person?.Mail</td>
         </tr>
     }
     </tbody>

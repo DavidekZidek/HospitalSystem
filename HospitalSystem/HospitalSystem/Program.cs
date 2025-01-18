@@ -1,3 +1,4 @@
+// Updated Program.cs
 using HospitalSystem.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using HospitalSystem.Application.Abstraction;
@@ -16,7 +17,7 @@ builder.Services.AddDbContext<HospitalSystemDbContext>(options =>
 
 builder.Services.AddControllersWithViews();
 
-//Configuration for Identity
+// Configuration for Identity
 builder.Services.AddIdentity<User, Capacity>()
     .AddEntityFrameworkStores<HospitalSystemDbContext>()
     .AddDefaultTokenProviders();

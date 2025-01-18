@@ -1,77 +1,119 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using HospitalSystem.Application.Abstraction;
 using HospitalSystem.Application.ViewModels;
-using HospitalSystem.Infrastructure.Identity.Enums;
-using HospitalSystem.Controllers;
 
-namespace HospitalSystem.Areas.Security.Controllers;
-
-[Area("Security")]
-public class AccountController : Controller
+namespace HospitalSystem.Areas.Security.Controllers
 {
-    IAccountService _accountService;
-    public AccountController(IAccountService security)
+    [Area("Security")]
+    public class AccountController : Controller
     {
-        _accountService = security;
-    }
-    
-    public IActionResult Register()
-    {
-        return View();
-    }
-    
-    [HttpPost]
-    public async Task<IActionResult> Register(RegisterViewModel registerVM)
-    {
-        if (ModelState.IsValid)
+        private readonly IAccountService _accountService;
+
+        public AccountController(IAccountService accountService)
         {
-            string[] errors = await _accountService.Register(registerVM, Capacitys.Patient);
-            if (errors == null)
+            _accountService = accountService;
+        }
+
+        // GET: Security/Account/Register
+        public IActionResult Register()
+        {
+            // Pokud je uživatel přihlášen, přesměrujeme jej do Dashboardu
+            if (User.Identity.IsAuthenticated)
             {
-                //login the user after registration
-                LoginViewModel loginVM = new LoginViewModel()
+                return RedirectToAction("Index", "Dashboard", new { area = "User" });
+            }
+
+            return View();
+        }
+
+        // POST: Security/Account/Register
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel registerVM)
+        {
+            if (ModelState.IsValid)
+            {
+                string[] errors = await _accountService.Register(registerVM);
+                if (errors == null)
                 {
-                    Username = registerVM.Username,
-                    Password = registerVM.Password
-                };
-                bool isLogged = await _accountService.Login(loginVM);
-                if (isLogged)
-                    return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).Replace(nameof(Controller), String.Empty), new { area = String.Empty });
+                    // Přihlášení uživatele po úspěšné registraci
+                    LoginViewModel loginVM = new LoginViewModel
+                    {
+                        Username = registerVM.Username,
+                        Password = registerVM.Password
+                    };
+                    bool isLogged = await _accountService.Login(loginVM);
+
+                    if (isLogged)
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "User" });
+                    }
+                }
                 else
-                    return RedirectToAction(nameof(Login));
+                {
+                    foreach (var error in errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error);
+                    }
+                }
             }
-            else
-            {
-                //errors to logger
-            }
+
+            return View(registerVM);
         }
-        return View(registerVM);
-    }
-    
-    public IActionResult Login()
-    {
-        return View();
-    }
-    
-    [HttpPost]
-    public async Task<IActionResult> Login(LoginViewModel loginVM)
-    {
-        if (ModelState.IsValid)
+
+        // GET: Security/Account/Login
+        public IActionResult Login()
         {
-            bool isLogged = await _accountService.Login(loginVM);
-            if (isLogged)
-                return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).Replace(nameof(Controller), String.Empty), new { area = String.Empty });
-            loginVM.LoginFailed = true;
+            // Pokud je uživatel přihlášen, přesměrujeme jej do Dashboardu
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Dashboard", new { area = "User" });
+            }
+
+            return View();
         }
-        return View(loginVM);
+
+        // POST: Security/Account/Login
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel loginVM)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isLogged = await _accountService.Login(loginVM);
+
+                if (isLogged)
+                {
+                    // Přesměrování do oblasti User po úspěšném přihlášení
+                    return RedirectToAction("Index", "Dashboard", new { area = "User" });
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid username or password.");
+            }
+
+            loginVM.LoginFailed = true;
+            return View(loginVM);
+        }
+
+        // POST: Security/Account/Logout
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            // Odhlášení uživatele
+            await _accountService.Logout();
+
+            // Přesměrování na přihlašovací stránku
+            return RedirectToAction(nameof(Login));
+        }
+
+        // Automatické odhlášení při spuštění aplikace
+        public async Task<IActionResult> AutoLogout()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                await _accountService.Logout();
+            }
+
+            return RedirectToAction(nameof(Login));
+        }
     }
-        
-    [Authorize]
-    public async Task<IActionResult> Logout()
-    {
-        await _accountService.Logout();
-        return RedirectToAction(nameof(Login));
-    }
-    
 }

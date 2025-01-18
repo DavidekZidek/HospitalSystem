@@ -1,36 +1,42 @@
 {
   "format": 1,
   "restore": {
-    "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem/HospitalSystem.csproj": {}
+    "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj": {}
   },
   "projects": {
-    "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Application/HospitalSystem.Application.csproj": {
+    "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Application\\HospitalSystem.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Application/HospitalSystem.Application.csproj",
+        "projectUniqueName": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Application\\HospitalSystem.Application.csproj",
         "projectName": "HospitalSystem.Application",
-        "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Application/HospitalSystem.Application.csproj",
-        "packagesPath": "/Users/davidzidek/.nuget/packages/",
-        "outputPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Application/obj/",
+        "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Application\\HospitalSystem.Application.csproj",
+        "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/davidzidek/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\David\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj": {
-                "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj"
+              "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj": {
+                "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj"
               },
-              "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj": {
-                "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj"
+              "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj"
               }
             }
           }
@@ -43,8 +49,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -65,26 +72,32 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj": {
+    "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj",
         "projectName": "HospitalSystem.Domain",
-        "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj",
-        "packagesPath": "/Users/davidzidek/.nuget/packages/",
-        "outputPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/obj/",
+        "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj",
+        "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/davidzidek/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\David\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -101,8 +114,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -119,38 +133,47 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj": {
+    "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj",
         "projectName": "HospitalSystem.Infrastructure",
-        "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj",
-        "packagesPath": "/Users/davidzidek/.nuget/packages/",
-        "outputPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/obj/",
+        "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/davidzidek/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\David\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj": {
-                "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj"
+              "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj": {
+                "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj"
               }
             }
           }
@@ -163,13 +186,18 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -201,40 +229,46 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem/HospitalSystem.csproj": {
+    "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem/HospitalSystem.csproj",
+        "projectUniqueName": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj",
         "projectName": "HospitalSystem",
-        "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem/HospitalSystem.csproj",
-        "packagesPath": "/Users/davidzidek/.nuget/packages/",
-        "outputPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem/obj/",
+        "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj",
+        "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/davidzidek/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\David\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Application/HospitalSystem.Application.csproj": {
-                "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Application/HospitalSystem.Application.csproj"
+              "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Application\\HospitalSystem.Application.csproj": {
+                "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Application\\HospitalSystem.Application.csproj"
               },
-              "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj": {
-                "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Domain/HospitalSystem.Domain.csproj"
+              "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj": {
+                "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj"
               },
-              "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj": {
-                "projectPath": "/Users/davidzidek/Desktop/HospitalSystem/HospitalSystem/HospitalSystem.Infrastructure/HospitalSystem.Infrastructure.csproj"
+              "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj"
               }
             }
           }
@@ -247,8 +281,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -280,7 +315,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
