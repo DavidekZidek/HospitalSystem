@@ -1,19 +1,20 @@
+using System.Threading.Tasks;
 using HospitalSystem.Application.Abstraction;
 using HospitalSystem.Infrastructure.Database;
 using HospitalSystem.Infrastructure.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace HospitalSystem.Application.Implementation
 {
     public class UserAppService : IUserAppService
     {
         private readonly HospitalSystemDbContext _dbContext;
+        private readonly SignInManager<User> _signInManager;
 
-        public UserAppService(HospitalSystemDbContext dbContext)
+        public UserAppService(HospitalSystemDbContext dbContext, SignInManager<User> signInManager)
         {
             _dbContext = dbContext;
+            _signInManager = signInManager;
         }
 
         public async Task<User> GetCurrentUserAsync(int userId)
@@ -23,83 +24,40 @@ namespace HospitalSystem.Application.Implementation
 
         public async Task<bool> UpdateUserAsync(User updatedUser)
         {
-            try
-            {
-                // Načtení uživatele z databáze podle ID
-                var userToUpdate = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == updatedUser.Id);
-                if (userToUpdate == null)
-                {
-                    return false; // Uživatel neexistuje
-                }
+            var userToUpdate = await _dbContext.Users.FindAsync(updatedUser.Id);
+            if (userToUpdate == null) return false;
 
-                // Aktualizace konkrétních vlastností uživatele
-                userToUpdate.PhoneNumber = updatedUser.PhoneNumber;
-                userToUpdate.Email = updatedUser.Email;
-                userToUpdate.UserName = updatedUser.UserName;
-
-                // Uložení změn do databáze
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                // Logování chyby (volitelné)
-                Console.WriteLine($"Error updating user: {ex.Message}");
-                return false;
-            }
+            userToUpdate.PhoneNumber = updatedUser.PhoneNumber;
+            userToUpdate.Email = updatedUser.Email;
+            userToUpdate.UserName = updatedUser.UserName;
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> UpdatePasswordAsync(int userId, string currentPassword, string newPassword)
         {
-            try
-            {
-                // Načtení uživatele z databáze podle ID
-                var user = await _dbContext.Users.FindAsync(userId);
-                if (user == null || user.PasswordHash != currentPassword) // Ověření aktuálního hesla
-                {
-                    return false;
-                }
+            var user = await _dbContext.Users.FindAsync(userId);
+            if (user == null || user.PasswordHash != currentPassword) return false;
 
-                // Aktualizace hesla
-                user.PasswordHash = newPassword;
-                _dbContext.Users.Update(user);
-
-                // Uložení změn do databáze
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                // Logování chyby (volitelné)
-                Console.WriteLine($"Error updating password: {ex.Message}");
-                return false;
-            }
+            user.PasswordHash = newPassword;
+            _dbContext.Users.Update(user);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> DeleteUserAsync(int userId)
         {
-            try
-            {
-                // Načtení uživatele z databáze podle ID
-                var user = await _dbContext.Users.FindAsync(userId);
-                if (user == null)
-                {
-                    return false;
-                }
+            var user = await _dbContext.Users.FindAsync(userId);
+            if (user == null) return false;
 
-                // Odstranění uživatele
-                _dbContext.Users.Remove(user);
+            _dbContext.Users.Remove(user);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
 
-                // Uložení změn do databáze
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                // Logování chyby (volitelné)
-                Console.WriteLine($"Error deleting user: {ex.Message}");
-                return false;
-            }
+        public async Task LogoutDashboard()
+        {
+            await _signInManager.SignOutAsync();
         }
     }
 }

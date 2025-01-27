@@ -1,10 +1,7 @@
 ﻿@using System.Security.Claims
 @{
-ViewData["Title"] = "User Dashboard";
-var userName = ViewBag.UserName ?? "Guest";
-var email = ViewBag.Email ?? "Not Provided";
-var phoneNumber = ViewBag.PhoneNumber ?? "Not Provided";
-var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+    ViewData["Title"] = "User Dashboard";
+    var userName = ViewBag.UserName ?? "Guest";
 }
 
 <link rel="stylesheet" href="~/css/dashboard.css" />
@@ -13,71 +10,47 @@ var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifie
     <!-- Boční navigační panel -->
     <aside class="sidebar">
         <div class="logo">
-            <h3>Hospital System</h3>
+            <a href="/" class="logo-link">
+                <h3>Hospital System</h3>
+            </a>
         </div>
         <ul class="menu">
-            <li><a href="/User/Dashboard/Index"><i class="active"></i> Profile</a></li>
-            <li><a href="/User/Dashboard/Appointments"><i class="bi bi-calendar-check"></i> Appointments</a></li>
-            <li><a href="/User/Dashboard/Reports"><i class="bi bi-file-earmark-text"></i> Reports</a></li>
-            <li><a href="/User/Dashboard/Settings"><i class="bi bi-file-earmark-text"></i> Settings</a></li>
-            <li><a href="/User/Dashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+            <li>
+                <a href="/User/Dashboard/Index" class="menu-link active">
+                    <i class="bi bi-person"></i> Profile
+                </a>
+            </li>
+            <li>
+                <a href="/User/Dashboard/Appointments" class="menu-link">
+                    <i class="bi bi-calendar-check"></i> Appointments
+                </a>
+            </li>
+            <li>
+                <a href="/User/Dashboard/Reports" class="menu-link">
+                    <i class="bi bi-file-earmark-text"></i> Reports
+                </a>
+            </li>
+            <li>
+                <a href="/User/Dashboard/Settings" class="menu-link">
+                    <i class="bi bi-gear"></i> Settings
+                </a>
+            </li>
+            <li>
+                <a href="/User/Dashboard/Logout" class="menu-link">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </li>
         </ul>
-
     </aside>
 
     <!-- Hlavní obsah -->
     <main class="main-content">
-        <div class="profile">
-            <h2>Welcome, @userName!</h2>
+        <div class="content">
+            <h2>Profile</h2>
+            <p>Here you can manage your profile settings and view your information.</p>
         </div>
-
-        <!-- Úprava jednotlivých údajů -->
-        <div class="edit-section">
-            <!-- Změna přezdívky -->
-            <div class="edit-item">
-                <h3>Change Username</h3>
-                <form asp-controller="Dashboard" asp-action="UpdateProfile" method="post">
-                    <input type="hidden" name="userId" value="@userId" />
-                    <label for="userName">New Username:</label>
-                    <input type="text" name="userName" value="@userName" placeholder="Enter new username" required />
-                    <button type="submit">Save Username</button>
-                </form>
-            </div>
-
-            <!-- Změna e-mailu -->
-            <div class="edit-item">
-                <h3>Change Email</h3>
-                <form asp-controller="Dashboard" asp-action="UpdateProfile" method="post">
-                    <input type="hidden" name="userId" value="@userId" />
-                    <label for="email">New Email:</label>
-                    <input type="email" name="email" value="@email" placeholder="Enter new email" required />
-                    <button type="submit">Save Email</button>
-                </form>
-            </div>
-
-            <!-- Změna telefonního čísla -->
-            <div class="edit-item">
-                <h3>Change Phone Number</h3>
-                <form asp-controller="Dashboard" asp-action="UpdateProfile" method="post">
-                    <input type="hidden" name="userId" value="@userId" />
-                    <label for="phoneNumber">New Phone Number:</label>
-                    <input type="tel" name="phoneNumber" value="@phoneNumber" placeholder="Enter new phone number" required />
-                    <button type="submit">Save Phone Number</button>
-                </form>
-            </div>
-
-            <!-- Změna hesla -->
-            <div class="edit-item">
-                <h3>Change Password</h3>
-                <form asp-controller="Dashboard" asp-action="ChangePassword" method="post">
-                    <input type="hidden" name="userId" value="@userId" />
-                    <label for="currentPassword">Current Password:</label>
-                    <input type="password" name="currentPassword" placeholder="Enter current password" required />
-                    <label for="newPassword">New Password:</label>
-                    <input type="password" name="newPassword" placeholder="Enter new password" required />
-                    <button type="submit">Change Password</button>
-                </form>
-            </div>
-        </div>
+        <footer>
+            <p>Vítejte uživateli - <strong>@userName</strong></p>
+        </footer>
     </main>
 </div>
