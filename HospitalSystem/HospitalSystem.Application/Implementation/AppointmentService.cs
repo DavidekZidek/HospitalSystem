@@ -73,13 +73,12 @@ namespace HospitalSystem.Application.Implementation
                 ProcedureName = procedureType
             };
             
-            // int userId = ...; // Z claimu
             var user = _dbContext.UserAccounts.Find(userId);
             if (user == null)
             {
                 throw new Exception($"User with ID={userId} does not exist in UserAccounts table.");
             }
-
+        
             // Vytvořte Registration a přidejte do ní new HealthAction
             var newRegistration = new Registration
             {
@@ -90,11 +89,12 @@ namespace HospitalSystem.Application.Implementation
                 ProcedureDescription = procedureType,
                 HealthActions   = new List<HealthAction> { healthAction }
             };
-
+        
             // Uložíme najednou => EF nejprve založí Registration, následně HealthAction
             _dbContext.Registrations.Add(newRegistration);
             _dbContext.SaveChanges();
         }
+        
 
         public void DeleteRegistration(int registrationId)
         {

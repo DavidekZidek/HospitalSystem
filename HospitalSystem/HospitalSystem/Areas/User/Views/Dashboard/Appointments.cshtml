@@ -1,4 +1,5 @@
-﻿@model IEnumerable<HospitalSystem.Domain.Entities.Registration>
+﻿@using System.Security.Claims
+@model IEnumerable<HospitalSystem.Domain.Entities.Registration>
 @{
     ViewData["Title"] = "Appointments";
 }
@@ -39,10 +40,11 @@
                 <tbody>
                 @if (Model != null && Model.Any())
                 {
+                    var i = 1;
                     foreach (var reg in Model)
                     {
                         <tr>
-                            <td>@reg.Id</td>
+                            <td>@i</td>
                             <td>@reg.ExecutionDate.ToShortDateString()</td>
                             <td>@reg.Status</td>
                             <td>@reg.ProcedureDescription</td>
@@ -53,6 +55,7 @@
                                 </form>
                             </td>
                         </tr>
+                        i++;
                     }
                 }
                 else
