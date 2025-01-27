@@ -72,11 +72,18 @@ namespace HospitalSystem.Application.Implementation
             {
                 ProcedureName = procedureType
             };
+            
+            // int userId = ...; // Z claimu
+            var user = _dbContext.UserAccounts.Find(userId);
+            if (user == null)
+            {
+                throw new Exception($"User with ID={userId} does not exist in UserAccounts table.");
+            }
 
             // Vytvořte Registration a přidejte do ní new HealthAction
             var newRegistration = new Registration
             {
-                UserAccountId   = userId,
+                UserAccountId   = user.Id,
                 Status          = "proposal",
                 CreationDate    = DateTime.Now,
                 ExecutionDate   = executionDate,
