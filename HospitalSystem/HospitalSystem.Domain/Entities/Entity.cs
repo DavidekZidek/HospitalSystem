@@ -4,6 +4,6 @@ namespace HospitalSystem.Domain.Entities
 {
     public class Entity<TKey> : IEntity<TKey>
     {
-        public required TKey Id { get; set; }
+        public  TKey Id { get; set; }
     }
 }

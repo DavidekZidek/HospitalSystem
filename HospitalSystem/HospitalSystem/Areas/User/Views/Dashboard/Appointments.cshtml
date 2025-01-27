@@ -1,7 +1,7 @@
-﻿@{
-ViewData["Title"] = "Appointments";
+﻿@model IEnumerable<HospitalSystem.Domain.Entities.Registration>
+@{
+    ViewData["Title"] = "Appointments";
 }
-
 <link rel="stylesheet" href="~/css/dashboard.css" />
 
 <div class="dashboard-container">
@@ -14,7 +14,7 @@ ViewData["Title"] = "Appointments";
             <li><a href="/User/Dashboard/Index"><i class="bi bi-person"></i> Profile</a></li>
             <li><a href="/User/Dashboard/Appointments" class="active"><i class="bi bi-calendar-check"></i> Appointments</a></li>
             <li><a href="/User/Dashboard/Reports"><i class="bi bi-file-earmark-text"></i> Reports</a></li>
-            <li><a href="/User/Dashboard/Settings"><i class="bi bi-file-earmark-text"></i> Settings</a></li>
+            <li><a href="/User/Dashboard/Settings"><i class="bi bi-gear"></i> Settings</a></li>
             <li><a href="/User/Dashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
         </ul>
     </aside>
@@ -24,6 +24,62 @@ ViewData["Title"] = "Appointments";
         <div class="content">
             <h2>Appointments</h2>
             <p>Here you can view and manage your appointments.</p>
+
+            <!-- 1) Výpis existujících registrací -->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Registration ID</th>
+                    <th>Execution Date</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var reg in Model)
+                    {
+                        <tr>
+                            <td>@reg.Id</td>
+                            <td>@reg.ExecutionDate.ToShortDateString()</td>
+                            <td>@reg.Status</td>
+                            <td>@reg.ProcedureDescription</td>
+                            <td>
+                                @* Příklad mazání registrace / storno: *@
+                                <form method="post" asp-action="CancelAppointment" asp-route-registrationId="@reg.Id">
+                                    <button type="submit" class="btn btn-danger">Cancel</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="5">No appointments found.</td></tr>
+                }
+                </tbody>
+            </table>
+
+            <!-- 2) Formulář pro vytvoření/rezervaci nového appointmentu -->
+            <hr />
+            <h4>Book New Appointment</h4>
+            <form method="post" asp-action="BookAppointment">
+                <div class="form-group">
+                    <label for="procedureType">Select Procedure Type:</label>
+                    <select id="procedureType" name="procedureType" class="form-control">
+                        <option value="BloodTest">Blood Test</option>
+                        <option value="Vaccination">Vaccination</option>
+                        <option value="HealthExamination">Health Examination</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="executionDate">Execution Date:</label>
+                    <input type="date" id="executionDate" name="executionDate" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Book</button>
+            </form>
         </div>
     </main>
 </div>

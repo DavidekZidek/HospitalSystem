@@ -2,6 +2,7 @@
 using HospitalSystem.Application.Abstraction;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using HospitalSystem.Domain.Entities;
 
 namespace HospitalSystem.Areas.User.Controllers
 {
@@ -9,10 +10,13 @@ namespace HospitalSystem.Areas.User.Controllers
     public class DashboardController : Controller
     {
         private readonly IUserAppService _userAppService;
+        private readonly IAppointmentService _appointmentService;
 
-        public DashboardController(IUserAppService userAppService)
+        public DashboardController(IUserAppService userAppService, 
+            IAppointmentService appointmentService)
         {
             _userAppService = userAppService;
+            _appointmentService = appointmentService;
         }
 
         private int? GetUserId()
@@ -82,10 +86,50 @@ namespace HospitalSystem.Areas.User.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public IActionResult Appointments()
         {
-            // Zobrazení stránky Appointments
-            return View();
+            var userId = GetUserId();
+            if (!userId.HasValue)
+                return RedirectToAction("Login", "Account", new { area = "" });
+
+            var appointments = _appointmentService.GetRegistrationsForUser(userId.Value);
+            return View(appointments);
+        }
+        
+        [HttpPost]
+        public IActionResult BookAppointment(string procedureType, DateTime executionDate)
+        {
+            var userId = GetUserId();
+            if (!userId.HasValue)
+                return RedirectToAction("Login", "Account", new { area = "" });
+
+            // 1. Vytvoření nového HealthAction (obecně – uložíme proceduru do DB)
+            var newHealthAction = new HealthAction
+            {
+                ProcedureName = procedureType
+            };
+            // Uložíme ho rovnou, abychom měli ID
+            // (případně to lze řešit v _appointmentService, to už je na vás)
+            _appointmentService.CreateHealthAction(newHealthAction);
+
+            // 2. Zavoláme službu, která uživatele zaregistruje na nově vzniklé vyšetření
+            _appointmentService.RegisterUserForHealthAction(
+                userId.Value, 
+                newHealthAction.Id, 
+                executionDate, 
+                status: "proposal"
+            );
+
+            // 3. Přesměrujeme zpět na seznam
+            return RedirectToAction("Appointments");
+        }
+        
+        [HttpPost]
+        public IActionResult CancelAppointment(int registrationId)
+        {
+            _appointmentService.DeleteRegistration(registrationId);
+            return RedirectToAction("Appointments");
         }
 
         public IActionResult Reports()
