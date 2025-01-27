@@ -377,7 +377,7 @@ namespace HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 1, 27, 10, 21, 52, 402, DateTimeKind.Local).AddTicks(6070),
+                            CreatedAt = new DateTime(2025, 1, 27, 20, 8, 59, 817, DateTimeKind.Local).AddTicks(3160),
                             Name = "Admin",
                             Password = "Admin123",
                             PersonalID = 0,
@@ -386,7 +386,7 @@ namespace HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 1, 27, 10, 21, 52, 402, DateTimeKind.Local).AddTicks(6160),
+                            CreatedAt = new DateTime(2025, 1, 27, 20, 8, 59, 817, DateTimeKind.Local).AddTicks(3210),
                             Name = "DoctorJohn",
                             Password = "Doctor123",
                             PersonalID = 0,
@@ -395,7 +395,43 @@ namespace HospitalSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 1, 27, 10, 21, 52, 402, DateTimeKind.Local).AddTicks(6160),
+                            CreatedAt = new DateTime(2025, 1, 27, 20, 8, 59, 817, DateTimeKind.Local).AddTicks(3210),
+                            Name = "PatientJane",
+                            Password = "Patient123",
+                            PersonalID = 0,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2025, 1, 27, 20, 8, 59, 817, DateTimeKind.Local).AddTicks(3210),
+                            Name = "PatientJane",
+                            Password = "Patient123",
+                            PersonalID = 0,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2025, 1, 27, 20, 8, 59, 817, DateTimeKind.Local).AddTicks(3220),
+                            Name = "PatientJane",
+                            Password = "Patient123",
+                            PersonalID = 0,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2025, 1, 27, 20, 8, 59, 817, DateTimeKind.Local).AddTicks(3220),
+                            Name = "PatientJane",
+                            Password = "Patient123",
+                            PersonalID = 0,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(2025, 1, 27, 20, 8, 59, 817, DateTimeKind.Local).AddTicks(3220),
                             Name = "PatientJane",
                             Password = "Patient123",
                             PersonalID = 0,
