@@ -1,0 +1,29 @@
+﻿@{
+ViewData["Title"] = "Appointments";
+}
+
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<div class="dashboard-container">
+    <!-- Boční navigační panel -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h3>Hospital System</h3>
+        </div>
+        <ul class="menu">
+            <li><a href="/User/Dashboard/Index"><i class="bi bi-person"></i> Profile</a></li>
+            <li><a href="/User/Dashboard/Appointments" class="active"><i class="bi bi-calendar-check"></i> Appointments</a></li>
+            <li><a href="/User/Dashboard/Reports"><i class="bi bi-file-earmark-text"></i> Reports</a></li>
+            <li><a href="/User/Dashboard/Settings"><i class="bi bi-file-earmark-text"></i> Settings</a></li>
+            <li><a href="/User/Dashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Hlavní obsah -->
+    <main class="main-content">
+        <div class="content">
+            <h2>Appointments</h2>
+            <p>Here you can view and manage your appointments.</p>
+        </div>
+    </main>
+</div>

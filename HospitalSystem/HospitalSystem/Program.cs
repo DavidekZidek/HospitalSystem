@@ -1,4 +1,3 @@
-// Updated Program.cs
 using HospitalSystem.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using HospitalSystem.Application.Abstraction;
@@ -17,7 +16,7 @@ builder.Services.AddDbContext<HospitalSystemDbContext>(options =>
 
 builder.Services.AddControllersWithViews();
 
-// Configuration for Identity
+// Konfigurace Identity
 builder.Services.AddIdentity<User, Capacity>()
     .AddEntityFrameworkStores<HospitalSystemDbContext>()
     .AddDefaultTokenProviders();
@@ -35,6 +34,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
     options.User.RequireUniqueEmail = true;
 });
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
@@ -44,14 +44,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-// Configuration of session
+// Konfigurace session
 builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
 builder.Services.AddSession(options =>
 {
-    // Set a short timeout for easy testing.
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
-    // Make the session cookie essential
     options.Cookie.IsEssential = true;
 });
 
@@ -62,6 +60,7 @@ builder.Services.AddScoped<IPatientAppService, PatientAppService>();
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IAccountService, AccountIdentityService>();
 builder.Services.AddScoped<ISecurityService, SecurityIdentityService>();
+builder.Services.AddScoped<IUserAppService, UserAppService>();
 
 var app = builder.Build();
 
@@ -74,7 +73,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-// Activation of session
+// Aktivace session
 app.UseSession();
 
 app.UseRouting();
