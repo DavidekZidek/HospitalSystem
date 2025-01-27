@@ -5,7 +5,7 @@ namespace HospitalSystem.Application.Implementation;
 
 public class HomeService : IHomeService
 {
-    IPatientAppService _patientAppService;
+    private readonly IPatientAppService _patientAppService;
 
     public HomeService(IPatientAppService patientAppService)
     {
@@ -14,9 +14,20 @@ public class HomeService : IHomeService
 
     public PatientViewModel GetPatientViewModel()
     {
-        PatientViewModel viewModel = new PatientViewModel();
-        viewModel.Patients = _patientAppService.Select();
-        
+        PatientViewModel viewModel = new PatientViewModel
+        {
+            Patients = _patientAppService.Select()
+        };
         return viewModel;
+    }
+
+    public string GetRedirectUrlForAppointment(bool isAuthenticated, string procedureType, string returnUrl)
+    {
+        if (isAuthenticated)
+        {
+            return $"/User/Dashboard/Appointments?procedureType={procedureType}";
+        }
+
+        return $"/Security/Account/Login?returnUrl={returnUrl}";
     }
 }

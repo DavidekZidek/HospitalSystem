@@ -1,52 +1,75 @@
 ﻿@{
-    ViewData["Title"] = "Medical Departments";
+    ViewData["Title"] = "Medical Services";
 }
 <link rel="stylesheet" href="~/css/departments.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
 <div class="container py-5">
-    <h1 class="text-center mb-4">Medical Departments</h1>
-    <p class="lead text-center">
-        Our hospital offers specialized care across various departments staffed by leading experts. Explore our departments and services tailored to your medical needs.
+    <h1 class="text-center mb-4">Our Medical Services</h1>
+    <p class="lead text-center mb-5">
+        Explore our specialized medical services designed to meet your health needs. Learn more about our core offerings below.
     </p>
 
-    <!-- Cardiology -->
-    <div class="row align-items-center mb-5">
-        <div class="col-md-4 text-center">
-            <i class="bi bi-heart-pulse text-danger" style="font-size: 4rem;"></i>
-        </div>
-        <div class="col-md-8">
-            <h3>Cardiology</h3>
-            <p>
-                Our cardiology department offers state-of-the-art cardiac care and surgical interventions. We provide comprehensive diagnosis and treatment plans for heart-related issues, catering to all age groups.
-            </p>
-        </div>
-    </div>
-
-    <!-- Dermatology -->
-    <div class="row align-items-center mb-5 flex-md-row-reverse">
-        <div class="col-md-4 text-center">
-            <i class="bi bi-droplet text-primary" style="font-size: 4rem;"></i> <!-- Ikona pro Dermatology -->
-        </div>
-        <div class="col-md-8">
-            <h3>Dermatology</h3>
-            <p>
-                Our dermatology department provides expert care for a variety of skin conditions, including acne, eczema, and skin cancer. Advanced treatment options ensure healthy and radiant skin for all our patients.
-            </p>
+    <!-- Blood Tests -->
+    <div class="card mb-5 shadow-sm border-0">
+        <div class="row g-0 align-items-center">
+            <div class="col-md-4 text-center py-4">
+                <i class="bi bi-droplet text-danger" style="font-size: 4rem;"></i>
+            </div>
+            <div class="col-md-8 p-4">
+                <h3 class="card-title">Blood Tests</h3>
+                <p>
+                    Our blood testing services offer precise and comprehensive diagnostics. From routine blood work to advanced panels, we use cutting-edge technology to deliver fast and reliable results.
+                </p>
+                <ul>
+                    <li><strong>Routine Tests:</strong> Complete Blood Count (CBC), Lipid Profile, Blood Sugar.</li>
+                    <li><strong>Advanced Panels:</strong> Hormone levels, Vitamin deficiencies, Allergy testing.</li>
+                    <li><strong>Specialized Tests:</strong> Cancer markers, Genetic testing, and more.</li>
+                </ul>
+                <a asp-controller="Home" asp-action="NavigateToAppointment" asp-route-procedureType="BloodTest" class="btn btn-danger mt-3">Book Appointment</a>
+            </div>
         </div>
     </div>
 
-
-    <!-- Orthopedics -->
-    <div class="row align-items-center mb-5">
-        <div class="col-md-4 text-center">
-            <i class="bi bi-bandaid text-warning" style="font-size: 4rem;"></i>
+    <!-- Health Check-up -->
+    <div class="card mb-5 shadow-sm border-0">
+        <div class="row g-0 align-items-center flex-md-row-reverse">
+            <div class="col-md-4 text-center py-4">
+                <i class="bi bi-heart text-success" style="font-size: 4rem;"></i>
+            </div>
+            <div class="col-md-8 p-4">
+                <h3 class="card-title">Health Check-up</h3>
+                <p>
+                    Regular health check-ups are key to maintaining overall well-being. Our comprehensive health check-up packages are designed for early detection and prevention of diseases.
+                </p>
+                <ul>
+                    <li><strong>Basic Package:</strong> Includes blood tests, urine tests, and vital sign monitoring.</li>
+                    <li><strong>Executive Package:</strong> Includes advanced diagnostics like ECG, chest X-ray, and ultrasonography.</li>
+                    <li><strong>Specialized Packages:</strong> Tailored for men, women, and senior citizens.</li>
+                </ul>
+                <a asp-controller="Home" asp-action="NavigateToAppointment" asp-route-procedureType="HealthCheckup" class="btn btn-success mt-3">Book Appointment</a>
+            </div>
         </div>
-        <div class="col-md-8">
-            <h3>Orthopedics</h3>
-            <p>
-                Our orthopedics department provides specialized care for injuries, arthritis, and mobility issues. We offer advanced surgical options, including joint replacements and minimally invasive procedures.
-            </p>
+    </div>
+
+    <!-- Vaccination -->
+    <div class="card mb-5 shadow-sm border-0">
+        <div class="row g-0 align-items-center">
+            <div class="col-md-4 text-center py-4">
+                <i class="bi bi-shield text-primary" style="font-size: 4rem;"></i>
+            </div>
+            <div class="col-md-8 p-4">
+                <h3 class="card-title">Vaccination</h3>
+                <p>
+                    Protect yourself and your loved ones with our comprehensive vaccination services. We provide immunization for all age groups, ensuring safety and health for your family.
+                </p>
+                <ul>
+                    <li><strong>Child Vaccination:</strong> Measles, Mumps, Rubella (MMR), Polio, Hepatitis B, and more.</li>
+                    <li><strong>Adult Vaccination:</strong> Influenza, HPV, COVID-19, Pneumococcal vaccines.</li>
+                    <li><strong>Travel Vaccination:</strong> Yellow Fever, Typhoid, Hepatitis A, and other region-specific vaccines.</li>
+                </ul>
+                <a asp-controller="Home" asp-action="NavigateToAppointment" asp-route-procedureType="Vaccination" class="btn btn-primary mt-3">Book Appointment</a>
+            </div>
         </div>
     </div>
 </div>
