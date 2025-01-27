@@ -65,22 +65,26 @@ namespace HospitalSystem.Application.Implementation
             _dbContext.SaveChanges();
         }
 
-        public void RegisterUserForHealthAction(int userAccountId, int healthActionId, DateTime executionDate, string status = "proposal")
+        public void RegisterUserForHealthAction(int userId, string procedureType, DateTime executionDate)
         {
-            var healthAction = _dbContext.HealthActions.Find(healthActionId);
-            if (healthAction == null)
-                throw new ArgumentException("Invalid HealthAction ID");
-
-            var newRegistration = new Registration
+            // Vytvořte HealthAction (zatím není v DB)
+            var healthAction = new HealthAction
             {
-                UserAccountId        = userAccountId,
-                Status               = status,
-                CreationDate         = DateTime.Now,
-                ExecutionDate        = executionDate,
-                ProcedureDescription = healthAction.ProcedureName,
-                HealthActions        = new List<HealthAction> { healthAction }
+                ProcedureName = procedureType
             };
 
+            // Vytvořte Registration a přidejte do ní new HealthAction
+            var newRegistration = new Registration
+            {
+                UserAccountId   = userId,
+                Status          = "proposal",
+                CreationDate    = DateTime.Now,
+                ExecutionDate   = executionDate,
+                ProcedureDescription = procedureType,
+                HealthActions   = new List<HealthAction> { healthAction }
+            };
+
+            // Uložíme najednou => EF nejprve založí Registration, následně HealthAction
             _dbContext.Registrations.Add(newRegistration);
             _dbContext.SaveChanges();
         }

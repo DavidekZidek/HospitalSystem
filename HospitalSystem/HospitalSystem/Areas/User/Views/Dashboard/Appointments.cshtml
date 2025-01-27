@@ -8,9 +8,7 @@
     <!-- Boční navigační panel -->
     <aside class="sidebar">
         <div class="logo">
-            <a href="/" class="logo-link">
-                <h3>Hospital System</h3>
-            </a>
+            <h3>Hospital System</h3>
         </div>
         <ul class="menu">
             <li><a href="/User/Dashboard/Index"><i class="bi bi-person"></i> Profile</a></li>
@@ -67,7 +65,10 @@
             <!-- 2) Formulář pro vytvoření/rezervaci nového appointmentu -->
             <hr />
             <h4>Book New Appointment</h4>
-            <form method="post" asp-action="BookAppointment">
+            <form method="post"
+                  asp-area="User"
+                  asp-controller="Dashboard"
+                  asp-action="BookAppointment">
                 <div class="form-group">
                     <label for="procedureType">Select Procedure Type:</label>
                     <select id="procedureType" name="procedureType" class="form-control">

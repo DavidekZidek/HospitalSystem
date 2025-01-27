@@ -25,7 +25,7 @@ namespace HospitalSystem.Application.Abstraction
         
         // Umožní uživateli zaregistrovat se na konkrétní vyšetření.
         // Nastavuje status, datum a další údaje.
-        void RegisterUserForHealthAction(int userAccountId, int healthActionId, DateTime executionDate, string status = "proposal");
+        void RegisterUserForHealthAction(int userId, string procedureType, DateTime executionDate);
 
         // Smaže registraci dle jejího ID (včetně navázaných vyšetření dle OnDelete nastavení).
         void DeleteRegistration(int registrationId);
