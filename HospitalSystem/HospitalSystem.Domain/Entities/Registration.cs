@@ -10,10 +10,10 @@ public class Registration : Entity<int>
     public string ProcedureDescription { get; set; }
 
     // Foreign Keys
-    public int ID_UserAccount { get; set; }
+    public int UserAccountId { get; set; }
     public UserAccount UserAccount { get; set; }
 
     // Navigation Properties
     public ICollection<HealthAction> HealthActions { get; set; }
-    public ICollection<Results> Results { get; set; }
-}
+    public Results Results { get; set; }
+}   

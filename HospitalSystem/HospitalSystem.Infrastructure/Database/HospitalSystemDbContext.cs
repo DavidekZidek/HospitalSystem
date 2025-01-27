@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using HospitalSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using HospitalSystem.Infrastructure.Database.Seeding;
+using HospitalSystem.Web.Models.Database.Configuration.MySQL;
 
 namespace HospitalSystem.Infrastructure.Database
 {
@@ -15,6 +16,11 @@ namespace HospitalSystem.Infrastructure.Database
         public DbSet<Person> Persons { get; set; }
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<HealthAction> HealthActions { get; set; }
+        public DbSet<Registration> Registrations { get; set; } 
+        public DbSet<Results> Results { get; set; }
+        public DbSet<BloodTest> BloodTests { get; set; }  
+        public DbSet<Vaccination> Vaccinations { get; set; } 
+        public DbSet<HealthExamination> HealthExaminations { get; set; } 
 
         public HospitalSystemDbContext(DbContextOptions<HospitalSystemDbContext> options) 
             : base(options)
@@ -49,6 +55,8 @@ namespace HospitalSystem.Infrastructure.Database
             
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(adminUserRoles);
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(doctorUserRoles);
+            
+            modelBuilder.ApplyConfiguration<Registration>(new RegistrationConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
