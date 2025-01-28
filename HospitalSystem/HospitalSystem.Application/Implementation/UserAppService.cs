@@ -9,12 +9,10 @@ namespace HospitalSystem.Application.Implementation
     public class UserAppService : IUserAppService
     {
         private readonly HospitalSystemDbContext _dbContext;
-        private readonly SignInManager<User> _signInManager;
 
-        public UserAppService(HospitalSystemDbContext dbContext, SignInManager<User> signInManager)
+        public UserAppService(HospitalSystemDbContext dbContext)
         {
             _dbContext = dbContext;
-            _signInManager = signInManager;
         }
 
         public async Task<User> GetCurrentUserAsync(int userId)
@@ -27,20 +25,12 @@ namespace HospitalSystem.Application.Implementation
             var userToUpdate = await _dbContext.Users.FindAsync(updatedUser.Id);
             if (userToUpdate == null) return false;
 
-            userToUpdate.PhoneNumber = updatedUser.PhoneNumber;
-            userToUpdate.Email = updatedUser.Email;
             userToUpdate.UserName = updatedUser.UserName;
-            await _dbContext.SaveChangesAsync();
-            return true;
-        }
+            userToUpdate.NormalizedUserName = updatedUser.UserName.ToUpper(); // Zajištění velkých písmen
+            userToUpdate.Email = updatedUser.Email;
+            userToUpdate.PhoneNumber = updatedUser.PhoneNumber;
 
-        public async Task<bool> UpdatePasswordAsync(int userId, string currentPassword, string newPassword)
-        {
-            var user = await _dbContext.Users.FindAsync(userId);
-            if (user == null || user.PasswordHash != currentPassword) return false;
-
-            user.PasswordHash = newPassword;
-            _dbContext.Users.Update(user);
+            _dbContext.Users.Update(userToUpdate);
             await _dbContext.SaveChangesAsync();
             return true;
         }
@@ -55,9 +45,30 @@ namespace HospitalSystem.Application.Implementation
             return true;
         }
 
-        public async Task LogoutDashboard()
+        public async Task<(bool Success, string Message)> ChangePasswordAsync(int userId, string currentPassword, string newPassword, string repeatedPassword)
         {
-            await _signInManager.SignOutAsync();
+            var user = await _dbContext.Users.FindAsync(userId);
+            if (user == null)
+                return (false, "User not found.");
+
+            var passwordHasher = new PasswordHasher<User>();
+
+            // Ověření aktuálního hesla
+            var verificationResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, currentPassword);
+            if (verificationResult == PasswordVerificationResult.Failed)
+                return (false, "Current password is incorrect.");
+
+            // Ověření, zda nová hesla souhlasí
+            if (newPassword != repeatedPassword)
+                return (false, "Passwords don't match!");
+
+            // Hashování nového hesla
+            user.PasswordHash = passwordHasher.HashPassword(user, newPassword);
+            _dbContext.Users.Update(user);
+            await _dbContext.SaveChangesAsync();
+
+            return (true, "Password changed successfully.");
         }
+
     }
 }

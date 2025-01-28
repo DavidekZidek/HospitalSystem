@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PUayhQT41XI=",
+  "dgSpecHash": "dxw3Uab2dgs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj",
+  "projectFilePath": "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\David\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\David\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.0\\microsoft.aspnetcore.cryptography.internal.8.0.0.nupkg.sha512",

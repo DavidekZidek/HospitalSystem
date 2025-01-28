@@ -22,3 +22,15 @@ C:\Users\David\RiderProjects\HospitalSystem\HospitalSystem\HospitalSystem.Domain
 C:\Users\David\RiderProjects\HospitalSystem\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\refint\HospitalSystem.Domain.dll
 C:\Users\David\RiderProjects\HospitalSystem\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\HospitalSystem.Domain.pdb
 C:\Users\David\RiderProjects\HospitalSystem\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\ref\HospitalSystem.Domain.dll
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\bin\Debug\net8.0\HospitalSystem.Domain.deps.json
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\bin\Debug\net8.0\HospitalSystem.Domain.dll
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\bin\Debug\net8.0\HospitalSystem.Domain.pdb
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\HospitalSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\HospitalSystem.Domain.AssemblyInfoInputs.cache
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\HospitalSystem.Domain.AssemblyInfo.cs
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\HospitalSystem.Domain.csproj.CoreCompileInputs.cache
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\HospitalSystem.Domain.sourcelink.json
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\HospitalSystem.Domain.dll
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\refint\HospitalSystem.Domain.dll
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\HospitalSystem.Domain.pdb
+C:\Users\David\RiderProjects\HospitalSystemNew\HospitalSystem\HospitalSystem.Domain\obj\Debug\net8.0\ref\HospitalSystem.Domain.dll

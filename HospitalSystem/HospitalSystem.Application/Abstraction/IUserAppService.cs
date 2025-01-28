@@ -7,8 +7,9 @@ namespace HospitalSystem.Application.Abstraction
     {
         Task<User> GetCurrentUserAsync(int userId); // Načtení uživatele podle ID
         Task<bool> UpdateUserAsync(User user); // Aktualizace uživatele
-        Task<bool> UpdatePasswordAsync(int userId, string currentPassword, string newPassword); // Změna hesla
         Task<bool> DeleteUserAsync(int userId); // Smazání uživatele podle ID
-        Task LogoutDashboard(); // Odhlášení uživatele a návrat na hlavní stránku
+        Task<(bool Success, string Message)> ChangePasswordAsync(int userId, string currentPassword, string newPassword, string repeatedPassword);
+
     }
+    
 }

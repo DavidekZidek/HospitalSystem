@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj",
       "projectName": "HospitalSystem.Domain",
-      "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj",
+      "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj",
       "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\obj\\",
+      "outputPath": "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

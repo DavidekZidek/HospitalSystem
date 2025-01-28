@@ -2500,11 +2500,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj",
+      "projectUniqueName": "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj",
       "projectName": "HospitalSystem",
-      "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj",
+      "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem\\HospitalSystem.csproj",
       "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem\\obj\\",
+      "outputPath": "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2525,14 +2525,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Application\\HospitalSystem.Application.csproj": {
-              "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Application\\HospitalSystem.Application.csproj"
+            "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem.Application\\HospitalSystem.Application.csproj": {
+              "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem.Application\\HospitalSystem.Application.csproj"
             },
-            "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj": {
-              "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj"
+            "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj": {
+              "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem.Domain\\HospitalSystem.Domain.csproj"
             },
-            "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystem\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj"
+            "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\David\\RiderProjects\\HospitalSystemNew\\HospitalSystem\\HospitalSystem.Infrastructure\\HospitalSystem.Infrastructure.csproj"
             }
           }
         }
