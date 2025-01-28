@@ -64,37 +64,26 @@ public class DoctorDashboardControler : Controller
             return Content($"Nalezeno: {appointments.Count} registrací.");
         }
 
+        [HttpPost]
+        public IActionResult UpdateAppointmentDate(int registrationId, DateTime newDate)
+        {
+            _doctorService.UpdateAppointmentDateAsync(registrationId, newDate);
+            return RedirectToAction("Appointments");
+        }
+        
+        [HttpPost]
+        public IActionResult CompleteAppointment(int registrationId, string resultMessage)
+        {
+            _doctorService.CompleteAppointmentAsync(registrationId, resultMessage);
+            return RedirectToAction("Appointments");
+        }
+        
+        [HttpPost]
+        public IActionResult DeleteAppointment(int registrationId)
+        {
+            _doctorService.DeleteAppointmentAsync(registrationId);
+            return RedirectToAction("Appointments");
+        }
 
-
-
-        // [HttpPost]
-        // public IActionResult UpdateAppointmentDate(int registrationId, DateTime newDate)
-        // {
-        //     _doctorService.UpdateAppointmentDate(registrationId, newDate);
-        //     return RedirectToAction("Appointments");
-        // }
-        //
-        // [HttpPost]
-        // public IActionResult CompleteAppointment(int registrationId, string resultMessage)
-        // {
-        //     _doctorService.CompleteAppointment(registrationId, resultMessage);
-        //     return RedirectToAction("Appointments");
-        // }
-        //
-        // [HttpPost]
-        // public IActionResult DeleteAppointment(int registrationId)
-        // {
-        //     _doctorService.DeleteAppointment(registrationId);
-        //     return RedirectToAction("Appointments");
-        // }
-        //
-        // [HttpGet]
-        // public IActionResult TestAppointments()
-        // {
-        //     var appointments = _doctorService.GetAllPatientAppointments();
-        //     return Content($"Nalezeno: {appointments.Count} registrací.");
-        // }
-
-        // Případně Logout, atd.
     }
 }
