@@ -213,5 +213,13 @@ namespace HospitalSystem.Areas.User.Controllers
             await _accountService.Logout();
             return RedirectToAction("Index", "Home", new { area = "" });
         }
+        
+        [HttpGet]
+        public IActionResult TestRole()
+        {
+            var allClaims = User.Claims.Select(c => $"{c.Type} = {c.Value}");
+            var result = "Tvoje claimy:\n" + string.Join("\n", allClaims);
+            return Content(result); // Vrátí raw text
+        }
     }
 }

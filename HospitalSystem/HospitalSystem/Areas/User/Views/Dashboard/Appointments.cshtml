@@ -5,87 +5,189 @@
 }
 <link rel="stylesheet" href="~/css/dashboard.css" />
 
-<div class="dashboard-container">
-    <!-- Boční navigační panel -->
-    <aside class="sidebar">
-        <div class="logo">
-            <h3>Hospital System</h3>
-        </div>
-        <ul class="menu">
-            <li><a href="/User/Dashboard/Index"><i class="bi bi-person"></i> Profile</a></li>
-            <li><a href="/User/Dashboard/Appointments" class="active"><i class="bi bi-calendar-check"></i> Appointments</a></li>
-            <li><a href="/User/Dashboard/Reports"><i class="bi bi-file-earmark-text"></i> Reports</a></li>
-            <li><a href="/User/Dashboard/Settings"><i class="bi bi-gear"></i> Settings</a></li>
-            <li><a href="/User/Dashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-        </ul>
-    </aside>
+@{
+    if (User.IsInRole("Patient"))
+    {
+        <div class="dashboard-container">
+            <!-- Boční navigační panel -->
+            <aside class="sidebar">
+                <div class="logo">
+                    <h3>Hospital System</h3>
+                </div>
+                <ul class="menu">
+                    <li><a href="/User/Dashboard/Index"><i class="bi bi-person"></i> Profile</a></li>
+                    <li><a href="/User/Dashboard/Appointments" class="active"><i class="bi bi-calendar-check"></i> Appointments</a></li>
+                    <li><a href="/User/Dashboard/Reports"><i class="bi bi-file-earmark-text"></i> Reports</a></li>
+                    <li><a href="/User/Dashboard/Settings"><i class="bi bi-gear"></i> Settings</a></li>
+                    <li><a href="/User/Dashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                </ul>
+            </aside>
 
-    <!-- Hlavní obsah -->
-    <main class="main-content">
-        <div class="content">
-            <h2>Appointments</h2>
-            <p>Here you can view and manage your appointments.</p>
+            <!-- Hlavní obsah -->
+            <main class="main-content">
+                <div class="content">
+                    <h2>Appointments</h2>
+                    <p>Here you can view and manage your appointments.</p>
 
-            <!-- 1) Výpis existujících registrací -->
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Registration ID</th>
-                    <th>Execution Date</th>
-                    <th>Status</th>
-                    <th>Description</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                @if (Model != null && Model.Any())
-                {
-                    var i = 1;
-                    foreach (var reg in Model)
-                    {
+                    <!-- 1) Výpis existujících registrací -->
+                    <table class="table table-striped">
+                        <thead>
                         <tr>
-                            <td>@i</td>
-                            <td>@reg.ExecutionDate.ToShortDateString()</td>
-                            <td>@reg.Status</td>
-                            <td>@reg.ProcedureDescription</td>
-                            <td>
-                                @* Příklad mazání registrace / storno: *@
-                                <form method="post" asp-action="CancelAppointment" asp-route-registrationId="@reg.Id">
-                                    <button type="submit" class="btn btn-danger">Cancel</button>
-                                </form>
-                            </td>
+                            <th>Registration ID</th>
+                            <th>Execution Date</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                            <th>Actions</th>
                         </tr>
-                        i++;
-                    }
-                }
-                else
-                {
-                    <tr><td colspan="5">No appointments found.</td></tr>
-                }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            var i = 1;
+                            foreach (var reg in Model)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@reg.ExecutionDate.ToShortDateString()</td>
+                                    <td>@reg.Status</td>
+                                    <td>@reg.ProcedureDescription</td>
+                                    <td>
+                                        @* Příklad mazání registrace / storno: *@
+                                        <form method="post" asp-action="CancelAppointment" asp-route-registrationId="@reg.Id">
+                                            <button type="submit" class="btn btn-danger">Cancel</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="5">No appointments found.</td></tr>
+                        }
+                        </tbody>
+                    </table>
 
-            <!-- 2) Formulář pro vytvoření/rezervaci nového appointmentu -->
-            <hr />
-            <h4>Book New Appointment</h4>
-            <form method="post"
-                  asp-area="User"
-                  asp-controller="Dashboard"
-                  asp-action="BookAppointment">
-                <div class="form-group">
-                    <label for="procedureType">Select Procedure Type:</label>
-                    <select id="procedureType" name="procedureType" class="form-control">
-                        <option value="BloodTest">Blood Test</option>
-                        <option value="Vaccination">Vaccination</option>
-                        <option value="HealthExamination">Health Examination</option>
-                    </select>
+                    <!-- 2) Formulář pro vytvoření/rezervaci nového appointmentu -->
+                    <hr/>
+                    <h4>Book New Appointment</h4>
+                    <form method="post"
+                          asp-area="User"
+                          asp-controller="Dashboard"
+                          asp-action="BookAppointment">
+                        <div class="form-group">
+                            <label for="procedureType">Select Procedure Type:</label>
+                            <select id="procedureType" name="procedureType" class="form-control">
+                                <option value="BloodTest">Blood Test</option>
+                                <option value="Vaccination">Vaccination</option>
+                                <option value="HealthExamination">Health Examination</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="executionDate">Execution Date:</label>
+                            <input type="date" id="executionDate" name="executionDate" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Book</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="executionDate">Execution Date:</label>
-                    <input type="date" id="executionDate" name="executionDate" class="form-control" />
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Book</button>
-            </form>
+            </main>
         </div>
-    </main>
-</div>
+    }
+}
+
+@{
+    if (User.IsInRole("Doctor"))
+    {
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <div class="logo">
+                    <h3>Hospital System</h3>
+                </div>
+                <ul class="menu">
+                    <li><a href="/User/Dashboard/Index"><i class="bi bi-person"></i> Profile</a></li>
+                    <li><a href="/User/Dashboard/Appointments" class="active"><i class="bi bi-calendar-check"></i> Appointments</a></li>
+                    <li><a href="/User/Dashboard/Settings"><i class="bi bi-gear"></i> Settings</a></li>
+                    <li><a href="/User/Dashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                </ul>
+            </aside>
+
+            <main class="main-content">
+                <div class="content">
+                    <h2>All Patient Appointments</h2>
+                    <p>Doctor can update date, complete or delete appointments.</p>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Execution Date</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                            <th>Update Date</th>
+                            <th>Complete</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            int i = 1;
+                            foreach (var reg in Model)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@reg.ExecutionDate</td>
+                                    <td>@reg.Status</td>
+                                    <td>@reg.ProcedureDescription</td>
+
+                                    <!-- Update Date form -->
+                                    <td>
+                                        <form method="post"
+                                              asp-area="User"
+                                              asp-controller="DoctorDashboard"
+                                              asp-action="UpdateAppointmentDate">
+                                            <input type="hidden" name="registrationId" value="@reg.Id"/>
+                                            <input type="date" name="newDate"/>
+                                            <button class="btn btn-primary btn-sm">Change</button>
+                                        </form>
+                                    </td>
+
+                                    <!-- Complete form (with result message) -->
+                                    <td>
+                                        <form method="post"
+                                              asp-area="User"
+                                              asp-controller="DoctorDashboard"
+                                              asp-action="CompleteAppointment">
+                                            <input type="hidden" name="registrationId" value="@reg.Id"/>
+                                            <input type="text" name="resultMessage" placeholder="Result info..."/>
+                                            <button class="btn btn-success btn-sm">Complete</button>
+                                        </form>
+                                    </td>
+
+                                    <!-- Delete form -->
+                                    <td>
+                                        <form method="post"
+                                              asp-area="User"
+                                              asp-controller="DoctorDashboard"
+                                              asp-action="DeleteAppointment">
+                                            <input type="hidden" name="registrationId" value="@reg.Id"/>
+                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7">No appointments found.</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    }
+}

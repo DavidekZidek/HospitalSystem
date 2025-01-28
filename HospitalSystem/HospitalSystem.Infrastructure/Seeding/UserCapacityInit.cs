@@ -12,20 +12,21 @@ internal class UserCapacityInit
             {
                 UserId = 1,
                 RoleId = 1
-            },
-            new IdentityUserRole<int>()
-            {
-                UserId = 1,
-                RoleId = 2
-            },
-            new IdentityUserRole<int>()
-            {
-                UserId = 1,
-                RoleId = 3
             }
+            // new IdentityUserRole<int>()
+            // {
+            //     UserId = 1,
+            //     RoleId = 2
+            // },
+            // new IdentityUserRole<int>()
+            // {
+            //     UserId = 1,
+            //     RoleId = 3
+            // }
         };
         return adminUserRoles;
     }
+    
     public List<IdentityUserRole<int>> GetRolesForDoctor()
     {
         List<IdentityUserRole<int>> doctorUserRoles = new List<IdentityUserRole<int>>()
@@ -34,13 +35,27 @@ internal class UserCapacityInit
             {
                 UserId = 2,
                 RoleId = 2
-            },
+            }
+            // new IdentityUserRole<int>()
+            // {
+            //     UserId = 2,
+            //     RoleId = 3
+            // }
+        };
+        return doctorUserRoles;
+    }
+    
+    public List<IdentityUserRole<int>> GetRolesForPatient(int userId)
+    {
+        List<IdentityUserRole<int>> patientUserRoles = new List<IdentityUserRole<int>>()
+        {
             new IdentityUserRole<int>()
             {
-                UserId = 2,
+                UserId = userId,
                 RoleId = 3
             }
         };
-        return doctorUserRoles;
+
+        return patientUserRoles;
     }
 }

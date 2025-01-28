@@ -9,75 +9,158 @@
 
 <link rel="stylesheet" href="~/css/dashboard.css" />
 
-<div class="dashboard-container">
-    <aside class="sidebar">
-        <div class="logo">
-            <a href="/" class="logo-link">
-                <h3>Hospital System</h3>
-            </a>
+
+@{
+    if (User.IsInRole("Patient"))
+    {
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <div class="logo">
+                    <a href="/" class="logo-link">
+                        <h3>Hospital System</h3>
+                    </a>
+                </div>
+                <ul class="menu">
+                    <li><a href="/User/Dashboard/Index"><i class="bi bi-person"></i> Profile</a></li>
+                    <li><a href="/User/Dashboard/Appointments"><i class="bi bi-calendar-check"></i> Appointments</a></li>
+                    <li><a href="/User/Dashboard/Reports"><i class="bi bi-file-earmark-text"></i> Reports</a></li>
+                    <li><a href="/User/Dashboard/Settings" class="active"><i class="bi bi-gear"></i> Settings</a></li>
+                    <li><a href="/User/Dashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                </ul>
+            </aside>
+
+            <main class="main-content">
+                <div class="profile">
+                    <h2>Welcome, @userName!</h2>
+                </div>
+
+                <div class="edit-section">
+                    <!-- Změna uživatelského jména -->
+                    <div class="edit-item">
+                        <h3>Change Username</h3>
+                        <form asp-controller="Dashboard" asp-action="UpdateUsername" method="post">
+                            <input type="hidden" name="userId" value="@userId"/>
+                            <label for="userName">New Username:</label>
+                            <input type="text" name="userName" value="@userName" placeholder="Enter new username" required/>
+                            <button type="submit">Save Username</button>
+                        </form>
+                    </div>
+
+                    <!-- Změna e-mailu -->
+                    <div class="edit-item">
+                        <h3>Change Email</h3>
+                        <form asp-controller="Dashboard" asp-action="UpdateEmail" method="post">
+                            <input type="hidden" name="userId" value="@userId"/>
+                            <label for="email">New Email:</label>
+                            <input type="email" name="email" value="@email" placeholder="Enter new email" required/>
+                            <button type="submit">Save Email</button>
+                        </form>
+                    </div>
+
+                    <!-- Změna telefonního čísla -->
+                    <div class="edit-item">
+                        <h3>Change Phone Number</h3>
+                        <form asp-controller="Dashboard" asp-action="UpdatePhoneNumber" method="post">
+                            <input type="hidden" name="userId" value="@userId"/>
+                            <label for="phoneNumber">New Phone Number:</label>
+                            <input type="tel" name="phoneNumber" value="@phoneNumber" placeholder="Enter new phone number" required/>
+                            <button type="submit">Save Phone Number</button>
+                        </form>
+                    </div>
+
+                    <!-- Změna hesla -->
+                    <div class="edit-item">
+                        <h3>Change Password</h3>
+                        <form asp-controller="Dashboard" asp-action="ChangePassword" method="post">
+                            <input type="hidden" name="UserId" value="@userId"/>
+                            <label for="CurrentPassword">Current Password:</label>
+                            <input type="password" name="CurrentPassword" placeholder="Enter current password" required/>
+                            <label for="NewPassword">New Password:</label>
+                            <input type="password" name="NewPassword" placeholder="Enter new password" required/>
+                            <label for="RepeatedPassword">Repeat New Password:</label>
+                            <input type="password" name="RepeatedPassword" placeholder="Repeat new password" required/>
+                            <button type="submit">Change Password</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
         </div>
-        <ul class="menu">
-            <li><a href="/User/Dashboard/Index"><i class="bi bi-person"></i> Profile</a></li>
-            <li><a href="/User/Dashboard/Appointments"><i class="bi bi-calendar-check"></i> Appointments</a></li>
-            <li><a href="/User/Dashboard/Reports"><i class="bi bi-file-earmark-text"></i> Reports</a></li>
-            <li><a href="/User/Dashboard/Settings" class="active"><i class="bi bi-gear"></i> Settings</a></li>
-            <li><a href="/User/Dashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-        </ul>
-    </aside>
+    }
+}
 
-    <main class="main-content">
-        <div class="profile">
-            <h2>Welcome, @userName!</h2>
+@{
+    if (User.IsInRole("Doctor"))
+    {
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <div class="logo">
+                    <a href="/" class="logo-link">
+                        <h3>Hospital System</h3>
+                    </a>
+                </div>
+                <ul class="menu">
+                    <li><a href="/User/Dashboard/Index"><i class="bi bi-person"></i> Profile</a></li>
+                    <li><a href="/User/Dashboard/Appointments"><i class="bi bi-calendar-check"></i> Appointments</a></li>
+                    <li><a href="/User/Dashboard/Settings" class="active"><i class="bi bi-gear"></i> Settings</a></li>
+                    <li><a href="/User/Dashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                </ul>
+            </aside>
+
+            <main class="main-content">
+                <div class="profile">
+                    <h2>Welcome, @userName!</h2>
+                </div>
+
+                <div class="edit-section">
+                    <!-- Změna uživatelského jména -->
+                    <div class="edit-item">
+                        <h3>Change Username</h3>
+                        <form asp-controller="Dashboard" asp-action="UpdateUsername" method="post">
+                            <input type="hidden" name="userId" value="@userId"/>
+                            <label for="userName">New Username:</label>
+                            <input type="text" name="userName" value="@userName" placeholder="Enter new username" required/>
+                            <button type="submit">Save Username</button>
+                        </form>
+                    </div>
+
+                    <!-- Změna e-mailu -->
+                    <div class="edit-item">
+                        <h3>Change Email</h3>
+                        <form asp-controller="Dashboard" asp-action="UpdateEmail" method="post">
+                            <input type="hidden" name="userId" value="@userId"/>
+                            <label for="email">New Email:</label>
+                            <input type="email" name="email" value="@email" placeholder="Enter new email" required/>
+                            <button type="submit">Save Email</button>
+                        </form>
+                    </div>
+
+                    <!-- Změna telefonního čísla -->
+                    <div class="edit-item">
+                        <h3>Change Phone Number</h3>
+                        <form asp-controller="Dashboard" asp-action="UpdatePhoneNumber" method="post">
+                            <input type="hidden" name="userId" value="@userId"/>
+                            <label for="phoneNumber">New Phone Number:</label>
+                            <input type="tel" name="phoneNumber" value="@phoneNumber" placeholder="Enter new phone number" required/>
+                            <button type="submit">Save Phone Number</button>
+                        </form>
+                    </div>
+
+                    <!-- Změna hesla -->
+                    <div class="edit-item">
+                        <h3>Change Password</h3>
+                        <form asp-controller="Dashboard" asp-action="ChangePassword" method="post">
+                            <input type="hidden" name="UserId" value="@userId"/>
+                            <label for="CurrentPassword">Current Password:</label>
+                            <input type="password" name="CurrentPassword" placeholder="Enter current password" required/>
+                            <label for="NewPassword">New Password:</label>
+                            <input type="password" name="NewPassword" placeholder="Enter new password" required/>
+                            <label for="RepeatedPassword">Repeat New Password:</label>
+                            <input type="password" name="RepeatedPassword" placeholder="Repeat new password" required/>
+                            <button type="submit">Change Password</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
         </div>
-
-        <div class="edit-section">
-            <!-- Změna uživatelského jména -->
-            <div class="edit-item">
-                <h3>Change Username</h3>
-                <form asp-controller="Dashboard" asp-action="UpdateUsername" method="post">
-                    <input type="hidden" name="userId" value="@userId" />
-                    <label for="userName">New Username:</label>
-                    <input type="text" name="userName" value="@userName" placeholder="Enter new username" required />
-                    <button type="submit">Save Username</button>
-                </form>
-            </div>
-
-            <!-- Změna e-mailu -->
-            <div class="edit-item">
-                <h3>Change Email</h3>
-                <form asp-controller="Dashboard" asp-action="UpdateEmail" method="post">
-                    <input type="hidden" name="userId" value="@userId" />
-                    <label for="email">New Email:</label>
-                    <input type="email" name="email" value="@email" placeholder="Enter new email" required />
-                    <button type="submit">Save Email</button>
-                </form>
-            </div>
-
-            <!-- Změna telefonního čísla -->
-            <div class="edit-item">
-                <h3>Change Phone Number</h3>
-                <form asp-controller="Dashboard" asp-action="UpdatePhoneNumber" method="post">
-                    <input type="hidden" name="userId" value="@userId" />
-                    <label for="phoneNumber">New Phone Number:</label>
-                    <input type="tel" name="phoneNumber" value="@phoneNumber" placeholder="Enter new phone number" required />
-                    <button type="submit">Save Phone Number</button>
-                </form>
-            </div>
-
-            <!-- Změna hesla -->
-            <div class="edit-item">
-                <h3>Change Password</h3>
-                <form asp-controller="Dashboard" asp-action="ChangePassword" method="post">
-                    <input type="hidden" name="UserId" value="@userId" />
-                    <label for="CurrentPassword">Current Password:</label>
-                    <input type="password" name="CurrentPassword" placeholder="Enter current password" required />
-                    <label for="NewPassword">New Password:</label>
-                    <input type="password" name="NewPassword" placeholder="Enter new password" required />
-                    <label for="RepeatedPassword">Repeat New Password:</label>
-                    <input type="password" name="RepeatedPassword" placeholder="Repeat new password" required />
-                    <button type="submit">Change Password</button>
-                </form>
-            </div>
-        </div>
-    </main>
-</div>
+    }
+}    

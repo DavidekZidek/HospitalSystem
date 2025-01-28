@@ -62,6 +62,7 @@ builder.Services.AddScoped<IAccountService, AccountIdentityService>();
 builder.Services.AddScoped<ISecurityService, SecurityIdentityService>();
 builder.Services.AddScoped<IUserAppService, UserAppService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IDoctorAppointmentService, DoctorAppointmentService>();
 
 var app = builder.Build();
 
