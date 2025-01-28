@@ -1,21 +1,29 @@
 using HospitalSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using HospitalSystem.Infrastructure.Identity;
 
 namespace HospitalSystem.Application.Abstraction
 {
     public interface IDoctorAppointmentService
     {
         // Vrátí všechna vyšetření (registrace), která vytvořili pacienti.
-        IList<Registration> GetAllPatientAppointments();
+        Task<IList<Registration>> GetAllPatientAppointmentsAsync();
 
+        // Vrátí všechny uživatele s rolí "Patient".
+        Task<IList<User>> GetAllPatientsAsync();
+        
         // Doktor aktualizuje termín (ExecutionDate).
-        void UpdateAppointmentDate(int registrationId, DateTime newDate);
+        Task UpdateAppointmentDateAsync(int registrationId, DateTime newDate);
 
-        // Doktor označí appointment za dokončený
-        void CompleteAppointment(int registrationId, string resultMessage);
+        // Doktor označí appointment za dokončený.
+        Task CompleteAppointmentAsync(int registrationId, string resultMessage);
 
         // Doktor smaže (zruší) appointment.
-        void DeleteAppointment(int registrationId);
+        Task DeleteAppointmentAsync(int registrationId);
+        
+        Task<IList<User>> GetUsersInRoleAsync(string role);
+
     }
 }

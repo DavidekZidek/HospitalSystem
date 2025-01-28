@@ -48,39 +48,52 @@ public class DoctorDashboardControler : Controller
 
         // 2) Seznam appointmentů (všechny od pacientů)
         [HttpGet]
-        public IActionResult Appointments()
+        public async Task<IActionResult> Appointments()
         {
-            var appointments = _doctorService.GetAllPatientAppointments();
-            return View(appointments); 
-        }
+            var appointments = await _doctorService.GetAllPatientAppointmentsAsync();
+            var patients = await _doctorService.GetAllPatientsAsync();
 
-        [HttpPost]
-        public IActionResult UpdateAppointmentDate(int registrationId, DateTime newDate)
-        {
-            _doctorService.UpdateAppointmentDate(registrationId, newDate);
-            return RedirectToAction("Appointments");
-        }
-
-        [HttpPost]
-        public IActionResult CompleteAppointment(int registrationId, string resultMessage)
-        {
-            _doctorService.CompleteAppointment(registrationId, resultMessage);
-            return RedirectToAction("Appointments");
-        }
-
-        [HttpPost]
-        public IActionResult DeleteAppointment(int registrationId)
-        {
-            _doctorService.DeleteAppointment(registrationId);
-            return RedirectToAction("Appointments");
+            ViewBag.Patients = patients;
+            return View(appointments);
         }
         
         [HttpGet]
-        public IActionResult TestAppointments()
+        public async Task<IActionResult> TestAppointments()
         {
-            var appointments = _doctorService.GetAllPatientAppointments();
+            var appointments = await _doctorService.GetAllPatientAppointmentsAsync();
             return Content($"Nalezeno: {appointments.Count} registrací.");
         }
+
+
+
+
+        // [HttpPost]
+        // public IActionResult UpdateAppointmentDate(int registrationId, DateTime newDate)
+        // {
+        //     _doctorService.UpdateAppointmentDate(registrationId, newDate);
+        //     return RedirectToAction("Appointments");
+        // }
+        //
+        // [HttpPost]
+        // public IActionResult CompleteAppointment(int registrationId, string resultMessage)
+        // {
+        //     _doctorService.CompleteAppointment(registrationId, resultMessage);
+        //     return RedirectToAction("Appointments");
+        // }
+        //
+        // [HttpPost]
+        // public IActionResult DeleteAppointment(int registrationId)
+        // {
+        //     _doctorService.DeleteAppointment(registrationId);
+        //     return RedirectToAction("Appointments");
+        // }
+        //
+        // [HttpGet]
+        // public IActionResult TestAppointments()
+        // {
+        //     var appointments = _doctorService.GetAllPatientAppointments();
+        //     return Content($"Nalezeno: {appointments.Count} registrací.");
+        // }
 
         // Případně Logout, atd.
     }

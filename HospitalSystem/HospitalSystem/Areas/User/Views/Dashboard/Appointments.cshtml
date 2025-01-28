@@ -116,10 +116,26 @@
                     <h2>All Patient Appointments</h2>
                     <p>Doctor can update date, complete or delete appointments.</p>
 
-                    <table class="table table-striped">
+                    <!-- Dropdown pro filtrování pacientů -->
+                    <div>
+                        <label for="patientFilter">Filter by Patient:</label>
+                        <select id="patientFilter" class="form-control">
+                            <option value="">All Patients</option>
+                            @if (ViewBag.Patients != null)
+                            {
+                                foreach (var patient in ViewBag.Patients)
+                                {
+                                    <option value="@patient.UserName">@patient.UserName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <table class="table table-striped" id="appointmentsTable">
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>Patient Name</th> <!-- Nový sloupec -->
                             <th>Execution Date</th>
                             <th>Status</th>
                             <th>Description</th>
@@ -136,6 +152,7 @@
                             {
                                 <tr>
                                     <td>@i</td>
+                                    <td class="patient-name">@(reg.UserAccount?.Name ?? "Unknown")</td> <!-- Jméno pacienta -->
                                     <td>@reg.ExecutionDate</td>
                                     <td>@reg.Status</td>
                                     <td>@reg.ProcedureDescription</td>
@@ -181,7 +198,7 @@
                         else
                         {
                             <tr>
-                                <td colspan="7">No appointments found.</td>
+                                <td colspan="8">No appointments found.</td>
                             </tr>
                         }
                         </tbody>
@@ -190,4 +207,10 @@
             </main>
         </div>
     }
+}
+
+<!-- JavaScript pro filtrování pacientů -->
+@section Scripts
+{
+    <script src="~/js/filterPatients.js"></script>
 }

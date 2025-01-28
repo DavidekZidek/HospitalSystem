@@ -5,65 +5,90 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using HospitalSystem.Infrastructure.Identity;
-using HospitalSystem.Infrastructure.Identity.Enums;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace HospitalSystem.Application.Implementation
 {
     public class DoctorAppointmentService : IDoctorAppointmentService
     {
         private readonly HospitalSystemDbContext _dbContext;
+        private readonly IUserManagementService _userManagementService;
+        private readonly UserManager<User> _userManager;
 
-        public DoctorAppointmentService(HospitalSystemDbContext dbContext)
+        public DoctorAppointmentService(HospitalSystemDbContext dbContext, IUserManagementService userManagementService, UserManager<User> userManager)
         {
             _dbContext = dbContext;
+            _userManagementService = userManagementService;
+            _userManager = userManager;
         }
 
-        public IList<Registration> GetAllPatientAppointments()
+        public async Task<IList<Registration>> GetAllPatientAppointmentsAsync()
         {
-            return _dbContext.Registrations
-                .Include(r => r.UserAccount)      
-                .Where(r => r.UserAccount.RoleId == (int)Capacitys.Patient)
-                .ToList();
+            // Získání uživatelů s rolí "Patient"
+            var patients = await _userManager.GetUsersInRoleAsync("Patient");
+
+            // Získání seznamu ID pacientů
+            var patientIds = patients.Select(p => p.Id).ToList();
+
+            // Načtení registrací pouze pro pacienty
+            var patientAppointments = await _dbContext.Registrations
+                .Include(r => r.UserAccount) // Připojení uživatelských účtů
+                .Where(r => patientIds.Contains(r.UserAccountId)) // Filtr pouze na pacienty
+                .ToListAsync();
+
+            return patientAppointments;
         }
 
-        public void UpdateAppointmentDate(int registrationId, DateTime newDate)
+        public async Task<IList<User>> GetAllPatientsAsync()
         {
-            var registration = _dbContext.Registrations.Find(registrationId);
+            // Získání seznamu všech uživatelů s rolí "Patient"
+            return await _userManager.GetUsersInRoleAsync("Patient");
+        }
+        
+        public async Task<IList<User>> GetUsersInRoleAsync(string role)
+        {
+            var users = await _userManager.GetUsersInRoleAsync(role);
+            return users.ToList();
+        }
+
+        public async Task UpdateAppointmentDateAsync(int registrationId, DateTime newDate)
+        {
+            var registration = await _dbContext.Registrations.FindAsync(registrationId);
             if (registration == null)
                 throw new Exception("Registration not found.");
 
             registration.ExecutionDate = newDate;
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void DeleteAppointment(int registrationId)
+        public async Task DeleteAppointmentAsync(int registrationId)
         {
-            var registration = _dbContext.Registrations.Find(registrationId);
+            var registration = await _dbContext.Registrations.FindAsync(registrationId);
             if (registration != null)
             {
                 _dbContext.Registrations.Remove(registration);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
         }
 
-        public void CompleteAppointment(int registrationId, string resultMessage)
+        public async Task CompleteAppointmentAsync(int registrationId, string resultMessage)
         {
-            var registration = _dbContext.Registrations
+            var registration = await _dbContext.Registrations
                 .Include(r => r.Results)
-                .FirstOrDefault(r => r.Id == registrationId);
+                .FirstOrDefaultAsync(r => r.Id == registrationId);
 
             if (registration == null)
                 throw new Exception("Registration not found.");
 
-            // Nastavíme status na "completed"
+            // Nastavení statusu na "completed"
             registration.Status = "completed";
 
-            // Pokud v DB existuje tabulka "Results" vázaná 1:1 na Registration,
-            // můžeme do ní uložit text. Pokud neexistuje, je potřeba ji vytvořit.
+            // Uložení výsledku do tabulky "Results"
             if (registration.Results == null)
             {
-                // Vytvoříme novou instanci
                 registration.Results = new Results
                 {
                     RegistrationId = registration.Id,
@@ -75,7 +100,7 @@ namespace HospitalSystem.Application.Implementation
                 registration.Results.ResultsDescription = resultMessage;
             }
 
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
