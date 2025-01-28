@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HospitalSystem.Infrastructure.Identity;
 using HospitalSystem.Infrastructure.Identity.Enums;
 
 namespace HospitalSystem.Application.Implementation
@@ -21,9 +22,8 @@ namespace HospitalSystem.Application.Implementation
         public IList<Registration> GetAllPatientAppointments()
         {
             return _dbContext.Registrations
-                .Include(r => r.UserAccount)
-                .Where(r => r.UserAccount.RoleId == 3)
-                .Include(r => r.HealthActions)
+                .Include(r => r.UserAccount)      
+                .Where(r => r.UserAccount.RoleId == (int)Capacitys.Patient)
                 .ToList();
         }
 

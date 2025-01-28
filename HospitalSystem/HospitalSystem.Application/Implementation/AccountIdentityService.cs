@@ -47,7 +47,10 @@ public class AccountIdentityService : IAccountService
         if (creationResult.Succeeded)
         {
             // 3) Pokud nebyly zadány role, použije se výchozí role "Patient"
-            roles ??= new[] { Capacitys.Patient };
+            if (roles == null || roles.Length == 0)
+            {
+                roles = new[] { Capacitys.Patient };
+            }
 
             // 4) Přiřazení rolí uživateli
             foreach (var role in roles)

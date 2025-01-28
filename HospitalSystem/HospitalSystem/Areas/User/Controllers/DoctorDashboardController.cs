@@ -43,7 +43,6 @@ public class DoctorDashboardControler : Controller
             ViewBag.Email = user.Email;
             ViewBag.PhoneNumber = user.PhoneNumber;
 
-            // Vrací "Areas/User/Views/DoctorDashboard/Index.cshtml" (dle konvencí)
             return View();
         }
 
@@ -53,7 +52,6 @@ public class DoctorDashboardControler : Controller
         {
             var appointments = _doctorService.GetAllPatientAppointments();
             return View(appointments); 
-            // => "Areas/User/Views/DoctorDashboard/Appointments.cshtml"
         }
 
         [HttpPost]
@@ -75,6 +73,13 @@ public class DoctorDashboardControler : Controller
         {
             _doctorService.DeleteAppointment(registrationId);
             return RedirectToAction("Appointments");
+        }
+        
+        [HttpGet]
+        public IActionResult TestAppointments()
+        {
+            var appointments = _doctorService.GetAllPatientAppointments();
+            return Content($"Nalezeno: {appointments.Count} registrací.");
         }
 
         // Případně Logout, atd.
