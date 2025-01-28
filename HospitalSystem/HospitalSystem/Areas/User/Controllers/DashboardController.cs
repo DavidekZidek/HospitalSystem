@@ -46,7 +46,10 @@ namespace HospitalSystem.Areas.User.Controllers
                 return RedirectToAction("Login", "Account", new { area = "Security" });
 
             ViewBag.UserName = user.UserName;
+            ViewBag.FirstName = user.FirstName;
+            ViewBag.LastName = user.LastName;
             ViewBag.Email = user.Email;
+            ViewBag.PhoneNumber = user.PhoneNumber;
 
             return View();
         }
