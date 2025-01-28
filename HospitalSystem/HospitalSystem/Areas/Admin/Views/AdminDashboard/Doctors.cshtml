@@ -1,8 +1,7 @@
-﻿@using System.Security.Claims
+﻿@model IEnumerable<HospitalSystem.Infrastructure.Identity.User>
+
 @{
     ViewData["Title"] = "Manage Doctors";
-    var firstName = ViewBag.FirstName ?? "Admin";
-    var lastName = ViewBag.LastName ?? "Unknown";
 }
 
 <link rel="stylesheet" href="~/css/dashboard.css" />
@@ -14,22 +13,57 @@
             <h3>Hospital System</h3>
         </div>
         <ul class="menu">
-            <li><a href="/Admin/AdminDashboard/Index"><i class="bi bi-house"></i> Dashboard</a></li>
-            <li><a href="/Admin/AdminDashboard/Users"><i class="bi bi-people"></i> Manage Users</a></li>
-            <li><a href="/Admin/AdminDashboard/Doctors" class="active"><i class="bi bi-person-badge"></i> Manage Doctors</a></li>
+            <li><a href="/Admin/AdminDashboard/Index"><i class="bi bi-person"></i> Profile</a></li>
+            <li><a href="/Admin/AdminDashboard/Users"><i class="bi bi-people"></i> Users</a></li>
+            <li><a href="/Admin/AdminDashboard/Doctors" class="active"><i class="bi bi-person-badge"></i> Doctors</a></li>
             <li><a href="/Admin/AdminDashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
         </ul>
     </aside>
 
     <!-- Hlavní obsah -->
     <main class="main-content">
-        <header>
-            <h1>Welcome, <strong>@firstName @lastName</strong>!</h1>
-        </header>
-
         <div class="content">
             <h2>Manage Doctors</h2>
-            <p>Here you can manage all registered doctors.</p>
+            <p>Below is the list of registered doctors:</p>
+
+            <!-- Tabulka s doktory -->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    int i = 1;
+                    foreach (var doctor in Model)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@doctor.UserName</td>
+                            <td>@doctor.Email</td>
+                            <td>
+                                <!-- Formulář pro odstranění doktora -->
+                                <form method="post" asp-action="DeleteDoctor" asp-route-doctorId="@doctor.Id">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">No doctors found.</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
         </div>
     </main>
 </div>

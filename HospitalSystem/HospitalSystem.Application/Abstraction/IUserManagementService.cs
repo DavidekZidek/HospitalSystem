@@ -12,5 +12,6 @@ namespace HospitalSystem.Application.Abstraction
         Task<List<string>> GetUserRolesAsync(string userId); // Načte všechny role uživatele
         Task<bool> AddUserToRoleAsync(string userId, string role); // Přidá uživatele do role
         Task<bool> RemoveUserFromRoleAsync(string userId, string role); // Odebere uživatele z role
+        Task<List<User>> GetAllDoctorsAsync();
     }
 }

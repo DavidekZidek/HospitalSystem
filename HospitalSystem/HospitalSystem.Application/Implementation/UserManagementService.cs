@@ -87,5 +87,12 @@ namespace HospitalSystem.Application.Implementation
             var result = await _userManager.RemoveFromRoleAsync(user, role);
             return result.Succeeded;
         }
+        
+        public async Task<List<User>> GetAllDoctorsAsync()
+        {
+            var doctors = await _userManager.GetUsersInRoleAsync("Doctor");
+            return doctors.ToList();
+        }
+
     }
 }
