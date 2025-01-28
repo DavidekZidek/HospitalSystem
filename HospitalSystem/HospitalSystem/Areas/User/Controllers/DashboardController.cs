@@ -28,26 +28,31 @@ namespace HospitalSystem.Areas.User.Controllers
             return int.TryParse(userIdClaim, out var userId) ? userId : null;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var userId = GetUserId();
             if (!userId.HasValue)
                 return RedirectToAction("Login", "Account", new { area = "Security" });
 
+            // Přesměrování admin uživatele do Admin oblasti
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "AdminDashboard", new { area = "Admin" });
+            }
+
             var user = await _userAppService.GetCurrentUserAsync(userId.Value);
             if (user == null)
                 return RedirectToAction("Login", "Account", new { area = "Security" });
 
             ViewBag.UserName = user.UserName;
-            ViewBag.FirstName = user.FirstName; // Přidáno
-            ViewBag.LastName = user.LastName;   // Přidáno
             ViewBag.Email = user.Email;
-            ViewBag.PhoneNumber = user.PhoneNumber;
 
             return View();
         }
 
 
+        [HttpGet]
         public IActionResult Reports()
         {
             return View();
@@ -57,7 +62,6 @@ namespace HospitalSystem.Areas.User.Controllers
         public IActionResult Appointments()
         {
             var userId = GetUserId();
-            TempData["TestUserId"] = userId.HasValue ? userId.Value.ToString() : "(null)";
             if (!userId.HasValue)
                 return RedirectToAction("Login", "Account", new { area = "Security" });
 
@@ -72,11 +76,7 @@ namespace HospitalSystem.Areas.User.Controllers
             if (!userId.HasValue)
                 return RedirectToAction("Login", "Account", new { area = "Security" });
 
-            _appointmentService.RegisterUserForHealthAction(
-                userId.Value,
-                procedureType,
-                executionDate);
-
+            _appointmentService.RegisterUserForHealthAction(userId.Value, procedureType, executionDate);
             return RedirectToAction("Appointments");
         }
 
@@ -87,6 +87,7 @@ namespace HospitalSystem.Areas.User.Controllers
             return RedirectToAction("Appointments");
         }
 
+        [HttpGet]
         public IActionResult Settings()
         {
             var userId = GetUserId();
@@ -125,7 +126,6 @@ namespace HospitalSystem.Areas.User.Controllers
             user.NormalizedUserName = userName.ToUpper();
 
             var result = await _userAppService.UpdateUserAsync(user);
-
             TempData[result ? "SuccessMessage" : "ErrorMessage"] = result
                 ? "Username updated successfully."
                 : "Failed to update username.";
@@ -151,7 +151,6 @@ namespace HospitalSystem.Areas.User.Controllers
             user.Email = email;
 
             var result = await _userAppService.UpdateUserAsync(user);
-
             TempData[result ? "SuccessMessage" : "ErrorMessage"] = result
                 ? "Email updated successfully."
                 : "Failed to update email.";
@@ -159,10 +158,8 @@ namespace HospitalSystem.Areas.User.Controllers
         }
 
         [HttpPost]
-        [HttpPost]
         public async Task<IActionResult> UpdatePhoneNumber(int userId, string phoneNumber)
         {
-            // Validace: Zkontrolujte, zda telefonní číslo není prázdné, má alespoň 9 znaků a obsahuje pouze čísla.
             if (string.IsNullOrEmpty(phoneNumber) || phoneNumber.Length < 9 || !phoneNumber.All(char.IsDigit))
             {
                 TempData["ErrorMessage"] = "Phone number must be at least 9 digits long and contain only numbers.";
@@ -179,13 +176,11 @@ namespace HospitalSystem.Areas.User.Controllers
             user.PhoneNumber = phoneNumber;
 
             var result = await _userAppService.UpdateUserAsync(user);
-
             TempData[result ? "SuccessMessage" : "ErrorMessage"] = result
                 ? "Phone number updated successfully."
                 : "Failed to update phone number.";
             return RedirectToAction("Settings");
         }
-
 
         [HttpPost]
         public async Task<IActionResult> ChangePassword(int userId, string currentPassword, string newPassword, string repeatedPassword)
@@ -196,13 +191,7 @@ namespace HospitalSystem.Areas.User.Controllers
                 return RedirectToAction("Settings");
             }
 
-            var (success, message) = await _userAppService.ChangePasswordAsync(
-                userId,
-                currentPassword,
-                newPassword,
-                repeatedPassword
-            );
-
+            var (success, message) = await _userAppService.ChangePasswordAsync(userId, currentPassword, newPassword, repeatedPassword);
             TempData[success ? "SuccessMessage" : "ErrorMessage"] = message;
             return RedirectToAction("Settings");
         }
@@ -212,14 +201,6 @@ namespace HospitalSystem.Areas.User.Controllers
         {
             await _accountService.Logout();
             return RedirectToAction("Index", "Home", new { area = "" });
-        }
-        
-        [HttpGet]
-        public IActionResult TestRole()
-        {
-            var allClaims = User.Claims.Select(c => $"{c.Type} = {c.Value}");
-            var result = "Tvoje claimy:\n" + string.Join("\n", allClaims);
-            return Content(result); // Vrátí raw text
         }
     }
 }

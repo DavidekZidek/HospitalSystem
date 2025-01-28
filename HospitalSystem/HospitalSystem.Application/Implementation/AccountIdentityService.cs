@@ -3,77 +3,91 @@ using HospitalSystem.Application.Abstraction;
 using HospitalSystem.Application.ViewModels;
 using HospitalSystem.Infrastructure.Identity;
 using HospitalSystem.Infrastructure.Identity.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace HospitalSystem.Application.Implementation;
 
 public class AccountIdentityService : IAccountService
 {
-    UserManager<User> userManager;
-    SignInManager<User> signInManager;
-    
+    private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
+
     public AccountIdentityService(UserManager<User> userManager, SignInManager<User> signInManager)
     {
-        this.userManager = userManager;
-        this.signInManager = signInManager;
+        _userManager = userManager;
+        _signInManager = signInManager;
     }
-    
+
     public async Task<bool> Login(LoginViewModel vm)
     {
-        var result = await signInManager.PasswordSignInAsync(vm.Username, vm.Password, true, true);
+        var result = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, true, true);
         return result.Succeeded;
     }
-    
+
     public Task Logout()
     {
-        return signInManager.SignOutAsync();
+        return _signInManager.SignOutAsync();
     }
-    
+
     public async Task<string[]> Register(RegisterViewModel vm, params Capacitys[] roles)
     {
-        // 1) Vytvoříme entitu uživatele
+        // 1) Vytvoření instance uživatele
         User user = new User
         {
-            UserName   = vm.Username,
-            FirstName  = vm.FirstName,
-            LastName   = vm.LastName,
-            Email      = vm.Email,
-            PhoneNumber= vm.Phone
+            UserName = vm.Username,
+            FirstName = vm.FirstName,
+            LastName = vm.LastName,
+            Email = vm.Email,
+            PhoneNumber = vm.Phone
         };
-        
-        // 2) Vytvoření v DB
-        var result = await userManager.CreateAsync(user, vm.Password);
 
-        if (result.Succeeded)
+        // 2) Vložení uživatele do databáze
+        var creationResult = await _userManager.CreateAsync(user, vm.Password);
+
+        if (creationResult.Succeeded)
         {
-            // --- Přidání výchozí role "Patient", pokud se nepošle nic ---
-            if (roles == null || roles.Length == 0)
-            {
-                roles = new[] { Capacitys.Patient };
-            }
+            // 3) Pokud nebyly zadány role, použije se výchozí role "Patient"
+            roles ??= new[] { Capacitys.Patient };
 
-            // 3) Přiřazení rolí
+            // 4) Přiřazení rolí uživateli
             foreach (var role in roles)
             {
-                var resultRole = await userManager.AddToRoleAsync(user, role.ToString());
-                // Pro případ, že AddToRoleAsync selže:
-                if (!resultRole.Succeeded)
+                var roleResult = await _userManager.AddToRoleAsync(user, role.ToString());
+                if (!roleResult.Succeeded)
                 {
-                    // Sloučení chyb do result.Errors
-                    foreach (var err in resultRole.Errors)
+                    // Pokud přiřazení role selže, přidáme chyby k hlavnímu seznamu
+                    foreach (var error in roleResult.Errors)
                     {
-                        result.Errors.Append(err);
+                        creationResult.Errors.Append(error);
                     }
                 }
             }
         }
-        
-        // 4) Pokud se vyskytly jakékoli chyby, přepíšeme je do string[] errors
-        string[] errors = null;
-        if (result.Errors != null && result.Errors.Any())
+
+        // 5) Vrácení chyb, pokud nastaly
+        return creationResult.Errors.Any()
+            ? creationResult.Errors.Select(e => e.Description).ToArray()
+            : null;
+    }
+
+    public async Task<List<string>> GetUserRolesAsync(int userId)
+    {
+        // Najdi uživatele podle ID
+        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+        // Pokud uživatel neexistuje, vrať prázdný seznam
+        if (user == null)
         {
-            errors = result.Errors.Select(e => e.Description).ToArray();
+            return new List<string>();
         }
 
-        return errors;
+        // Získej role uživatele
+        return (await _userManager.GetRolesAsync(user)).ToList();
+    }
+
+    public async Task<User> GetCurrentUserAsync(string username)
+    {
+        // Najdi uživatele podle uživatelského jména
+        return await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == username);
     }
 }

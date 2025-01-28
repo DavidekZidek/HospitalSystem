@@ -1,0 +1,35 @@
+﻿@using System.Security.Claims
+@{
+    ViewData["Title"] = "Manage Doctors";
+    var firstName = ViewBag.FirstName ?? "Admin";
+    var lastName = ViewBag.LastName ?? "Unknown";
+}
+
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<div class="dashboard-container">
+    <!-- Boční navigační panel -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h3>Hospital System</h3>
+        </div>
+        <ul class="menu">
+            <li><a href="/Admin/AdminDashboard/Index"><i class="bi bi-house"></i> Dashboard</a></li>
+            <li><a href="/Admin/AdminDashboard/Users"><i class="bi bi-people"></i> Manage Users</a></li>
+            <li><a href="/Admin/AdminDashboard/Doctors" class="active"><i class="bi bi-person-badge"></i> Manage Doctors</a></li>
+            <li><a href="/Admin/AdminDashboard/Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Hlavní obsah -->
+    <main class="main-content">
+        <header>
+            <h1>Welcome, <strong>@firstName @lastName</strong>!</h1>
+        </header>
+
+        <div class="content">
+            <h2>Manage Doctors</h2>
+            <p>Here you can manage all registered doctors.</p>
+        </div>
+    </main>
+</div>
